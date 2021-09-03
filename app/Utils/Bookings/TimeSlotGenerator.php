@@ -2,6 +2,7 @@
 
 namespace App\Utils\Bookings;
 
+use App\Models\Service;
 use App\Models\Schedule;
 use Carbon\CarbonInterval;
 
@@ -11,12 +12,14 @@ class TimeSlotGenerator
 
     protected $interval;
 
-    public function __construct(Schedule $schedule)
+    public function __construct(Schedule $schedule, Service $service)
     {
         $this->interval = CarbonInterval::minute(self::INCREMENT)
             ->toPeriod(
                 $schedule->date->setTimeFrom($schedule->start_time),
-                $schedule->date->setTimeFrom($schedule->end_time),
+                $schedule->date->setTimeFrom(
+                    $schedule->end_time->subMinutes($service->duration)
+                ),
             );
     }
 
