@@ -4,11 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Service;
 use App\Models\Schedule;
-use App\Models\Appointment;
-use App\Utils\Filters\AppointmentFilter;
-use App\Utils\Bookings\TimeSlotGenerator;
-use App\Utils\Filters\SlotsPastTodayFilter;
-use App\Utils\Filters\UnavailablilityFilter;
+use App\Models\Employee;
 
 class BookingController extends Controller
 {
@@ -18,15 +14,9 @@ class BookingController extends Controller
 
         $service = Service::findOrFail(3);
 
-        $appointments = Appointment::whereDate('date', '2021-09-06')->get();
+        $employee = Employee::find(1); 
 
-        $slots = (new TimeSlotGenerator($schedule, $service))
-            ->applyFilters([
-                new SlotsPastTodayFilter(),
-                new UnavailablilityFilter($schedule->unavailabilities),
-                new AppointmentFilter($appointments)
-            ])
-            ->get();
+        $slots = $employee->availableTimeSlots($schedule, $service);
 
         return view('bookings.create', compact('slots'));
     }
