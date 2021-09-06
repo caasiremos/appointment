@@ -14,7 +14,7 @@ class BookingController extends Controller
 
         $service = Service::findOrFail(3);
 
-        $employee = Employee::find(1); 
+        $employee = Employee::find(1);
 
         $slots = $employee->availableTimeSlots($schedule, $service);
 
