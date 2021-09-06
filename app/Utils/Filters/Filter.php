@@ -6,5 +6,5 @@ use App\Utils\Bookings\TimeSlotGenerator;
 
 interface Filter
 {
-    public function apply(TimeSlotGenerator $timeSlotGenerator, CarbonPeriod $carbonPeriod);
+    public function apply(TimeSlotGenerator $timeSlotGenerator, CarbonPeriod $interval);
 }

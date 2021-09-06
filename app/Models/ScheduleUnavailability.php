@@ -2,22 +2,21 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Schedule extends Model
+class ScheduleUnavailability extends Model
 {
     use HasFactory;
 
     protected $casts = [
-        'date' => 'datetime',
         'start_time' => 'datetime',
         'end_time' => 'datetime',
     ];
 
-    public function unavailabilities(): HasMany
+    public function schedule(): BelongsTo
     {
-        return $this->hasMany(ScheduleUnavailability::class);
+        return $this->belongsTo(Schedule::class);
     }
 }
