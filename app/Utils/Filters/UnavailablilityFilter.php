@@ -8,14 +8,14 @@ use Illuminate\Database\Eloquent\Collection;
 
 class UnavailablilityFilter implements Filter
 {
-    protected $unvailabilities;
+    public $unvailabilities;
 
     public function __construct(Collection $unvailabilities)
     {
         $this->unvailabilities = $unvailabilities;
     }
 
-    public function apply(TimeSlotGenerator $timeSlotGenerator, CarbonPeriod $interval): bool
+    public function apply(TimeSlotGenerator $timeSlotGenerator, CarbonPeriod $interval)
     {
         $interval->addFilter(function ($slot) use ($timeSlotGenerator) {
             foreach ($this->unvailabilities as $unavailability) {
@@ -34,7 +34,7 @@ class UnavailablilityFilter implements Filter
                     return false;
                 }
             }
+            return true;
         });
-        return true;
     }
 }
