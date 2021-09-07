@@ -7,7 +7,7 @@
                     wire:model="state.service">
                 <option value="">Select service</option>
                 @foreach($services as $service)
-                    <option value="{{$service->id}}">{{$service->name}}</option>
+                    <option value="{{$service->id}}">{{$service->name}} ({{$service->duration}} minutes)</option>
                 @endforeach
             </select>
         </div>
