@@ -65,6 +65,11 @@ class CreateBooking extends Component
         return Service::findOrFail($this->state['service']);
     }
 
+    public function getHasDetailsToBookProperty()
+    {
+        return true;
+    }
+
     public function getSelectedEmployeeProperty()
     {
         if (!$this->state['employee']) {
