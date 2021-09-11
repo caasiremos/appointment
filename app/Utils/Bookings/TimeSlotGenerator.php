@@ -9,7 +9,7 @@ use App\Utils\Filters\Filter;
 
 class TimeSlotGenerator
 {
-    public const INCREMENT = 15;
+    public const INCREMENT = 30;
 
     public $schedule;
 
