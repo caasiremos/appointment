@@ -14,9 +14,16 @@ class ShowBooking extends Component
     {
         $this->appointment = $appointment;
 
-//        if (request()->token !== $appointment->token) {
-//            throw new AuthorizationException();
-//        }
+        if (request()->token !== $appointment->token) {
+            throw new AuthorizationException();
+        }
+    }
+
+    public function cancelBooking()
+    {
+        $this->appointment->update([
+            'cancelled_at' => now()
+        ]);
     }
 
     public function render()
