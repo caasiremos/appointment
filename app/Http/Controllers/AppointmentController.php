@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Appointment;
 use Illuminate\Http\Request;
 
 class AppointmentController extends Controller
@@ -9,11 +10,11 @@ class AppointmentController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        $appointments = Appointment::with('employee', 'service')->get();
+        return view('appointments.index', compact('appointments'));
     }
 
     /**
