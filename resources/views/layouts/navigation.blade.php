@@ -32,7 +32,7 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('unavailabilities.index')">
+                    <x-nav-link :href="route('unavailabilities.index')" :active="request()->routeIs('unavailabilities.index')">
                         {{ __('Schedule Off Hours') }}
                     </x-nav-link>
                 </div>
