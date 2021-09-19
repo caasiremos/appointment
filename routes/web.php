@@ -4,6 +4,11 @@ use App\Http\Livewire\ShowBooking;
 use App\Http\Livewire\CreateBooking;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\UnavailabilityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,5 +31,10 @@ Route::get('/dashboard', function () {
 
 Route::get('/bookings/create', CreateBooking::class);
 Route::get('/bookings/{appointment:uuid}', ShowBooking::class)->name('bookings.show');
+Route::resource('services', ServiceController::class);
+Route::resource('employees', EmployeeController::class);
+Route::resource('appointments', AppointmentController::class);
+Route::resource('unavailabilities', UnavailabilityController::class);
+Route::resource('schedules', ScheduleController::class);
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

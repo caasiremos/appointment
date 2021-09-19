@@ -17,31 +17,31 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')">
+                    <x-nav-link :href="route('services.index')" :active="request()->routeIs('services')">
                         {{ __('Services') }}
                     </x-nav-link>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex" :active="request()->routeIs('employees')">
+                    <x-nav-link :href="route('employees.index')">
                         {{ __('Employees') }}
                     </x-nav-link>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex" :active="request()->routeIs('schedules.index')">
                     <x-nav-link :href="route('dashboard')">
                         {{ __('Schedules') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')">
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('unavailabilities.index')">
                         {{ __('Off Days/Hours') }}
                     </x-nav-link>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex" :active="request()->routeIs('appointments.index')">
                     <x-nav-link :href="route('dashboard')">
                         {{ __('Appointments') }}
                     </x-nav-link>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex" :active="request()->routeIs('users.index')">
                     <x-nav-link :href="route('dashboard')">
                         {{ __('Users') }}
                     </x-nav-link>
