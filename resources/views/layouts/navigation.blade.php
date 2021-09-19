@@ -17,23 +17,23 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('services.index')" :active="request()->routeIs('services')">
+                    <x-nav-link :href="route('services.index')" :active="request()->routeIs('services.index')">
                         {{ __('Services') }}
                     </x-nav-link>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex" :active="request()->routeIs('employees')">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex" :active="request()->routeIs('employees.index')">
                     <x-nav-link :href="route('employees.index')">
                         {{ __('Employees') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex" :active="request()->routeIs('schedules.index')">
-                    <x-nav-link :href="route('dashboard')">
+                    <x-nav-link :href="route('schedules.index')">
                         {{ __('Schedules') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('unavailabilities.index')">
-                        {{ __('Off Days/Hours') }}
+                        {{ __('Schedule Off Hours') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex" :active="request()->routeIs('appointments.index')">

@@ -13,7 +13,7 @@ class UnavailabilityController extends Controller
      */
     public function index()
     {
-        //
+     
     }
 
     /**

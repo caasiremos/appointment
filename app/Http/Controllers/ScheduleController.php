@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -10,11 +11,11 @@ class ScheduleController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Response
      */
     public function index()
     {
-        return view('services.index');
+        $schedules = Schedule::with('employee')->get();
+        return view('schedules.index', compact('schedules'));
     }
 
     /**

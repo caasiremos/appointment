@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Services') }}
+            {{ __('Schedules') }}
         </h2>
     </x-slot>
 
@@ -19,15 +19,19 @@
                                         <tr>
                                             <th scope="col"
                                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Name
+                                                Employee
                                             </th>
                                             <th scope="col"
                                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Duration
+                                                Date
                                             </th>
                                             <th scope="col"
                                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Description
+                                                Start Time
+                                            </th>
+                                            <th scope="col"
+                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                End Time
                                             </th>
                                             <th scope="col"
                                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -37,18 +41,18 @@
                                         </thead>
                                         <tbody class="bg-white divide-y divide-gray-200">
                                         <tr>
-                                            @foreach($services as $service)
+                                            @foreach($schedules as $schedule)
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">{{$service->name}}</a>
-                                                </td>
-                                                <td class="px-6 py-4 whitespace-nowrap">
-                                                    <span
-                                                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                                      {{$service->duration}} minutes
-                                                    </span>
+                                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">{{$schedule->employee->name}}</a>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                    {{$service->description}}
+                                                    {{$schedule->date->format('D jS M Y')}}
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                    {{$schedule->start_time->format('g:i A')}}
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                    {{$schedule->end_time->format('g:i A')}}
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                                     <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
