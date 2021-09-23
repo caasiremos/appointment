@@ -18,6 +18,13 @@ class Employee extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'email',
+        'telephone',
+        'position'
+    ];
+
     /**
      * Employee available timeslots for a given date
      * @param Schedule $schedule
