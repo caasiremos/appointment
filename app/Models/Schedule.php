@@ -11,6 +11,12 @@ class Schedule extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'date',
+        'start_time',
+        'end_time'
+    ];
+
     protected $casts = [
         'date' => 'datetime',
         'start_time' => 'datetime',

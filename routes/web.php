@@ -3,6 +3,7 @@
 use App\Http\Livewire\ShowBooking;
 use App\Http\Livewire\CreateBooking;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\CreateSchedule;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\EmployeeController;
@@ -36,5 +37,6 @@ Route::resource('employees', EmployeeController::class);
 Route::resource('appointments', AppointmentController::class);
 Route::resource('unavailabilities', UnavailabilityController::class);
 Route::resource('schedules', ScheduleController::class);
+Route::get('employees/schedules/create', CreateSchedule::class)->name('employees.schedules.create');
 
 require __DIR__ . '/auth.php';

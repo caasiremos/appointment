@@ -64,7 +64,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="bg-indigo-500 text-white h-11 px-4 text-center font-bold rounded-lg w-full">
+            <button class="bg-indigo-500 text-white h-11 px-4 text-center font-bold rounded-lg w-full">
                 Book now
             </button>
         @endif
