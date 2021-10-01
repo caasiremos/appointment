@@ -10,6 +10,11 @@ class ScheduleUnavailability extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'start_time',
+        'end_time'
+    ];
+
     protected $casts = [
         'start_time' => 'datetime',
         'end_time' => 'datetime',
@@ -18,5 +23,10 @@ class ScheduleUnavailability extends Model
     public function schedule(): BelongsTo
     {
         return $this->belongsTo(Schedule::class);
+    }
+
+    public function employee(): BelongsTo
+    {
+        return $this->belongsTo(Employee::class);
     }
 }

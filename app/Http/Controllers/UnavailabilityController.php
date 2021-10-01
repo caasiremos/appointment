@@ -13,7 +13,9 @@ class UnavailabilityController extends Controller
      */
     public function index()
     {
-        $schedule_unvailabilities = ScheduleUnavailability::with('schedule')->get();
+        $schedule_unvailabilities = ScheduleUnavailability::with('schedule', 'employee')
+            ->orderBy('created_at', 'desc')
+            ->get();
         return view('schedule-unavailabilities.index', compact('schedule_unvailabilities'));
     }
 

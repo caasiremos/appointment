@@ -1,8 +1,15 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Schedule Off Hours') }}
-        </h2>
+        <div class="flex justify-between">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Schedule Off Hours') }}
+            </h2>
+
+            <a type="button" href="/employees/unavailabilities/create"
+               class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                {{ __('Schedule Off Hours') }}
+            </a>
+        </div>
     </x-slot>
 
     <div class="py-12">
@@ -17,6 +24,10 @@
                                     <table class="min-w-full divide-y divide-gray-200">
                                         <thead class="bg-gray-50">
                                         <tr>
+                                            <th scope="col"
+                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Employee
+                                            </th>
                                             <th scope="col"
                                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Schedule Date
@@ -46,6 +57,11 @@
                                         <tbody class="bg-white divide-y divide-gray-200">
                                         <tr>
                                             @foreach($schedule_unvailabilities as $schedule_unvailability)
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">
+                                                        {{$schedule_unvailability->employee->name }}
+                                                    </a>
+                                                </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                     <a href="#" class="text-indigo-600 hover:text-indigo-900">
                                                         {{$schedule_unvailability->schedule->date->format('D jS M Y')}}

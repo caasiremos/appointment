@@ -80,6 +80,7 @@
                                 </div>
                             </div>
                         </div>
+                        <span class="mt-5">{{$appointments->links()}}</span>
                     </div>
                 </div>
             </div>

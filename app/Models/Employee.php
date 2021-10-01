@@ -75,4 +75,9 @@ class Employee extends Model
     {
         return $this->hasMany(Appointment::class);
     }
+
+    public function scheduleUnavailabilities(): HasMany
+    {
+        return $this->hasMany(ScheduleUnavailability::class);
+    }
 }
