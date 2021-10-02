@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\CreateUser;
 use App\Http\Livewire\ShowBooking;
 use App\Http\Livewire\CreateBooking;
 use Illuminate\Support\Facades\Route;
@@ -42,5 +43,6 @@ Route::resource('unavailabilities', UnavailabilityController::class);
 Route::resource('schedules', ScheduleController::class);
 Route::get('employees/schedules/create', CreateSchedule::class)->name('employees.schedules.create');
 Route::get('employees/unavailabilities/create', CreateScheduleUnavailability::class)->name('employees.unavailabilities.create');
+Route::get('manage/users/create', CreateUser::class)->name('manage.users.create');
 
 require __DIR__ . '/auth.php';
