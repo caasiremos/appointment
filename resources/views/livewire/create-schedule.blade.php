@@ -42,7 +42,7 @@
 
                     <!-- End Time -->
                     <div class="mt-4">
-                        <x-label for="start_time" :value="__('Start Time')"></x-label>
+                        <x-label for="start_time" :value="__('Stop Time')"></x-label>
                         <x-input id="start_time" class="block mt-1 w-full" type="time" name="start_time"
                                  :value="old('state.start_time')" required
                             wire:model="state.end_time"></x-input>

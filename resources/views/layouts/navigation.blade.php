@@ -69,11 +69,11 @@
                                 {{ __('Users') }}
                             </x-dropdown-link>
 
-                            <x-dropdown-link :href="route('users.index')">
+                            <x-dropdown-link :href="route('manage.roles.index')">
                                 {{ __('Roles') }}
                             </x-dropdown-link>
 
-                            <x-dropdown-link :href="route('users.index')">
+                            <x-dropdown-link :href="route('manage.permissions.index')">
                                 {{ __('Permissions') }}
                             </x-dropdown-link>
 
