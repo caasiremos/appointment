@@ -6,6 +6,8 @@ use Carbon\Carbon;
 use Livewire\Component;
 use App\Models\Service;
 use App\Models\Employee;
+use App\Jobs\ProcessSms;
+use App\Jobs\ProcessEmail;
 use App\Models\Appointment;
 
 /**
@@ -74,22 +76,27 @@ class CreateBooking extends Component
 
     public function createBooking()
     {
-        $this->validate();
+//        $this->validate();
+//
+//        $appointment = Appointment::make([
+//            'date' => $this->timeObject->toDateString(),
+//            'start_time' => $this->timeObject->toTimeString(),
+//            'end_time' => $this->timeObject->clone()->addMinutes(
+//                $this->selectedService->duration
+//            )->toTimeString(),
+//            'client_name' => $this->state['name'],
+//            'client_email' => $this->state['email'],
+//        ]);
+//
+//        $appointment->service()->associate($this->selectedService);
+//        $appointment->employee()->associate($this->selectedEmployee);
+//
+//        $appointment->save();
 
-        $appointment = Appointment::make([
-            'date' => $this->timeObject->toDateString(),
-            'start_time' => $this->timeObject->toTimeString(),
-            'end_time' => $this->timeObject->clone()->addMinutes(
-                $this->selectedService->duration
-            )->toTimeString(),
-            'client_name' => $this->state['name'],
-            'client_email' => $this->state['email'],
-        ]);
+        $appointment = Appointment::latest()->first();
 
-        $appointment->service()->associate($this->selectedService);
-        $appointment->employee()->associate($this->selectedEmployee);
-
-        $appointment->save();
+        ProcessEmail::dispatch($appointment);
+        ProcessSms::dispatch($appointment);
 
         return redirect()->to(route('bookings.show', $appointment) . '?token=' . $appointment->token);
     }
