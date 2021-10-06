@@ -77,7 +77,7 @@
                                 {{ __('Permissions') }}
                             </x-dropdown-link>
 
-                            <x-dropdown-link :href="route('users.index')">
+                            <x-dropdown-link :href="route('manage.rolesPermissions')">
                                 {{ __('Roles Permissions') }}
                             </x-dropdown-link>
                         </x-slot>

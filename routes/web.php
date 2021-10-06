@@ -10,6 +10,8 @@ use App\Http\Livewire\CreatePermission;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Livewire\RolePermissions;
+use App\Http\Livewire\CreateRolePermission;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SystemRoleController;
@@ -52,5 +54,7 @@ Route::get('manage/roles', [SystemRoleController::class, 'index'])->name('manage
 Route::get('manage/roles/create', CreateRole::class)->name('manage.roles.create');
 Route::get('manage/permissions', [SystemPermissionController::class, 'index'])->name('manage.permissions.index');
 Route::get('manage/permissions/create', CreatePermission::class)->name('manage.permissions.create');
+Route::get('manage/role-permissions', RolePermissions::class)->name('manage.rolesPermissions');
+Route::get('manage/role-permissions/create', CreateRolePermission::class)->name('manage.rolesPermissions.create');
 
 require __DIR__ . '/auth.php';
