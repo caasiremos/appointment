@@ -42,6 +42,7 @@ class CreateBooking extends Component
             'state.time' => 'required|numeric',
             'state.name' => 'required|string',
             'state.email' => 'required|email',
+            'state.client_telephone' => 'required|numeric',
         ];
     }
 
@@ -76,6 +77,10 @@ class CreateBooking extends Component
 
     public function createBooking()
     {
+        if (str_starts_with($this->state['client_telephone'], '+')) {
+            session()->flash('message', 'Client telephone should start with country code format eg, +256');
+        }
+        session()->flash('message', 'correct phone number');
 //        $this->validate();
 //
 //        $appointment = Appointment::make([
@@ -86,6 +91,7 @@ class CreateBooking extends Component
 //            )->toTimeString(),
 //            'client_name' => $this->state['name'],
 //            'client_email' => $this->state['email'],
+//            'client_telephone' => $this->state['client_telephone'],
 //        ]);
 //
 //        $appointment->service()->associate($this->selectedService);
@@ -93,12 +99,12 @@ class CreateBooking extends Component
 //
 //        $appointment->save();
 
-        $appointment = Appointment::latest()->first();
+//        $appointment = Appointment::latest()->first();
+//        ProcessEmail::dispatch($appointment);
+//        ProcessSms::dispatch($appointment);
+//        ProcessSms::dispatch($appointment);
 
-        ProcessEmail::dispatch($appointment);
-        ProcessSms::dispatch($appointment);
-
-        return redirect()->to(route('bookings.show', $appointment) . '?token=' . $appointment->token);
+//        return redirect()->to(route('bookings.show', $appointment) . '?token=' . $appointment->token);
     }
 
     public function getSelectedServiceProperty()

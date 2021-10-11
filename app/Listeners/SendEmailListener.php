@@ -4,6 +4,7 @@ namespace App\Listeners;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use App\Utils\Notification\NotificationHelper;
 
 class SendEmailListener
 {
@@ -25,6 +26,7 @@ class SendEmailListener
      */
     public function handle($event)
     {
-        dd($event);
+        $appointment = $event->appointment;
+        NotificationHelper::sendEmail($appointment);
     }
 }

@@ -18,6 +18,7 @@ class Appointment extends Model
         'end_time',
         'client_name',
         'client_email',
+        'client_telephone',
         'cancelled_at',
         'employee_id',
         'service_id'
@@ -57,5 +58,4 @@ class Appointment extends Model
     {
         return $this->belongsTo(Employee::class);
     }
-
 }

@@ -72,8 +72,8 @@
                                 </div>
                             </div>
                         </div>
+                        <span class="mt-5">{{$schedules->links()}}</span>
                     </div>
-
                 </div>
             </div>
         </div>

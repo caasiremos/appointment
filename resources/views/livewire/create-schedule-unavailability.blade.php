@@ -32,7 +32,7 @@
                                 wire:model="state.schedule" {{ !$this->employeeSchedules->count() ? 'disabled="disabled"' : '' }} required>
                             <option value="" disabled>Select Schedule</option>
                             @foreach($this->employeeSchedules as $schedule)
-                                @if(!\Carbon\Carbon::now()->gt($schedule->date))
+                                @if(!\Carbon\Carbon::now()->subDay()->gt($schedule->date))
                                     <option
                                         value="{{$schedule->id }}">{{$schedule->date->format('D  jS M Y') }}</option>
                                 @endif

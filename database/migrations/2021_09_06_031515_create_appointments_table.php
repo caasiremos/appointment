@@ -24,6 +24,7 @@ class CreateAppointmentsTable extends Migration
             $table->time('end_time');
             $table->string('client_name');
             $table->string('client_email');
+            $table->string('client_telephone');
             $table->timestamp('cancelled_at')->nullable();
 
             $table->timestamps();

@@ -3,8 +3,10 @@
 namespace App\Jobs;
 
 use App\Models\Appointment;
+use App\Events\SendSmsEvent;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
+use App\Events\SendEmailEvent;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
@@ -47,6 +49,11 @@ class ProcessSms implements ShouldQueue
      */
     public function handle()
     {
-        //
+        // Allow only 2 emails every 1 second
+        Redis::throttle("sms_notification")->allow(2)->every(1)->then(function () {
+            event(new SendSmsEvent($this->appointment));
+        }, function () {
+            $this->release(2);
+        });
     }
 }

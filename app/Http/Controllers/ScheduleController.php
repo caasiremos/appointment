@@ -14,7 +14,8 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        $schedules = Schedule::with('employee')->get();
+        $schedules = Schedule::with('employee', 'unavailabilities')
+            ->paginate(10);
         return view('schedules.index', compact('schedules'));
     }
 
@@ -42,7 +43,7 @@ class ScheduleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Response
      */
     public function show($id)
@@ -53,7 +54,7 @@ class ScheduleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Response
      */
     public function edit($id)
@@ -65,7 +66,7 @@ class ScheduleController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param  int  $id
+     * @param int $id
      * @return Response
      */
     public function update(Request $request, $id)
@@ -76,7 +77,7 @@ class ScheduleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Response
      */
     public function destroy($id)
