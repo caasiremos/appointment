@@ -15,7 +15,7 @@
             <div class="p-6 bg-white border-b border-gray-200">
                 <form wire:submit.prevent="createUser" method="POST">
                 @csrf
-                    <!-- Name -->
+                <!-- Name -->
                     <div>
                         <x-label for="name" :value="__('Name')"></x-label>
                         <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')"
@@ -34,6 +34,41 @@
                     </div>
 
                     <!-- Telephone -->
+                    <div class="mt-4">
+                        <x-label for="telephone" :value="__('Telephone')"></x-label>
+                        <x-input maxlength="10" id="telephone" class="block mt-1 w-full" type="number" name="telephone"
+                                 :value="old('telephone')" required
+                                 wire:model="telephone"></x-input>
+                        @error('email') <span class="error">{{ $message }}</span> @enderror
+
+                    </div>
+
+                    <div class="mt-4">
+                        <x-label for="position" :value="__('Position')"></x-label>
+                        <select name="position" id="position" class="block mt-1 w-full border-none rounded-lg
+                            rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                wire:model="position">
+                            <option>Managing Partner</option>
+                            <option>Associate</option>
+                            <option>Legal Assistant</option>
+                            <option>Law clerk</option>
+                            <option>Chief strategist</option>
+                            <option>General Employee</option>
+                        </select>
+                    </div>
+
+                    <div class="mt-4">
+                        <x-label for="role" :value="__('Role')"></x-label>
+                        <select name="role" id="role" class="block mt-1 w-full border-none rounded-lg
+                            rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                wire:model="role">
+                            @foreach($this->roles as $role)
+                                <option>{{ucwords($role->display_name) }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <!-- Password -->
                     <div class="mt-4">
                         <x-label for="password" :value="__('Temporary Password')"></x-label>
                         <x-input maxlength="10" id="password" class="block mt-1 w-full" type="text" name="password"

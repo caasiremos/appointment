@@ -12,6 +12,10 @@ use Illuminate\Contracts\Foundation\Application;
 
 class ServiceController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth']);
+    }
     /**
      * Display a listing of the resource.
      *
