@@ -17,7 +17,8 @@
                         <select name="system_resource" id="system_resource" class="block mt-1 w-full border-none rounded-lg
                             rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                 wire:model="system_resource">
-                            @foreach($system_resources as $system_resource)
+                            <option value="">Select System Resouce</option>
+                        @foreach($system_resources as $system_resource)
                                 <option>{{ $system_resource }}</option>
                             @endforeach
                         </select>

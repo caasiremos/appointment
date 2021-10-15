@@ -51,7 +51,7 @@ class CreateUser extends Component
         $user = User::create([
             'name' => $this->name,
             'email' => $this->email,
-            'password' => $this->password,
+            'password' => bcrypt($this->password),
             'telephone' => $this->telephone,
             'position' => $this->position,
         ]);

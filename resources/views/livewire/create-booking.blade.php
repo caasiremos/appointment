@@ -14,8 +14,8 @@
 
         <div class="mb-6 {{ !$users->count() ? 'opacity-25' : '' }}">
             <label class="inline-block text-gray-700 font-bold mb-2">Please select an Employee</label>
-            <select name="employee" id="employee" class="bg-white h-10 w-full border-none rounded-lg"
-                    wire:model="state.employee" {{ !$users->count() ? 'disabled="disabled"' : '' }}>
+            <select name="user" id="user" class="bg-white h-10 w-full border-none rounded-lg"
+                    wire:model="state.user" {{ !$users->count() ? 'disabled="disabled"' : '' }}>
                 <option value="">Select Employee</option>
                 @foreach($users as $user)
                     <option value="{{$user->id}}">{{$user->name}}</option>

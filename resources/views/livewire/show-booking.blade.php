@@ -7,7 +7,7 @@
         <div class="border-t border-gray-400 py-2">
             <div class="font-semibold">
                 {{$appointment->service->name }} for {{ $appointment->service->duration }} minutes
-                with {{ $appointment->employee->name }}
+                with {{ $appointment->user->name }}
             </div>
         </div>
         <div class="text-gray-700">

@@ -97,9 +97,9 @@ class CreateBooking extends Component
 
         $appointment->save();
 
-        $appointment = Appointment::latest()->first();
-        ProcessEmail::dispatch($appointment);
-        ProcessSms::dispatch($appointment);
+//        $appointment = Appointment::latest()->first();
+//        ProcessEmail::dispatch($appointment);
+//        ProcessSms::dispatch($appointment);
 
         return redirect()->to(route('bookings.show', $appointment) . '?token=' . $appointment->token);
 
