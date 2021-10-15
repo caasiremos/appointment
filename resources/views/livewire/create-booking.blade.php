@@ -12,21 +12,21 @@
             </select>
         </div>
 
-        <div class="mb-6 {{ !$employees->count() ? 'opacity-25' : '' }}">
+        <div class="mb-6 {{ !$users->count() ? 'opacity-25' : '' }}">
             <label class="inline-block text-gray-700 font-bold mb-2">Please select an Employee</label>
             <select name="employee" id="employee" class="bg-white h-10 w-full border-none rounded-lg"
-                    wire:model="state.employee" {{ !$employees->count() ? 'disabled="disabled"' : '' }}>
+                    wire:model="state.employee" {{ !$users->count() ? 'disabled="disabled"' : '' }}>
                 <option value="">Select Employee</option>
-                @foreach($employees as $employee)
-                    <option value="{{$employee->id}}">{{$employee->name}}</option>
+                @foreach($users as $user)
+                    <option value="{{$user->id}}">{{$user->name}}</option>
                 @endforeach
             </select>
         </div>
 
-        <div class="mb-6 {{ !$this->selectedService || !$this->selectedEmployee ? 'opacity-25' : '' }}">
+        <div class="mb-6 {{ !$this->selectedService || !$this->selectedUser ? 'opacity-25' : '' }}">
             <label class="inline-block text-gray-700 font-bold mb-2">Select Appointment Time</label>
-            <livewire:booking-calendar :service="$this->selectedService" :employee="$this->selectedEmployee"
-                                       :key="optional($this->selectedEmployee)->id"/>
+            <livewire:booking-calendar :service="$this->selectedService" :employee="$this->selectedUser"
+                                       :key="optional($this->selectedUser)->id"/>
         </div>
         @if($this->hasDetailsToBook)
             <div class="mb-6">
@@ -36,7 +36,7 @@
 
                 <div class="border-t border-b border-gray-300 py-2">
                     {{ $this->selectedService->name }} ({{ $this->selectedService->duration }} minutes)
-                    with {{ $this->selectedEmployee->name }}
+                    with {{ $this->selectedUser->name }}
                     on {{ $this->timeObject->format('D jS M Y') }} at {{ $this->timeObject->format('g:i A') }}
                 </div>
             </div>

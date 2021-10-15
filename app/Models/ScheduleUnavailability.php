@@ -25,8 +25,8 @@ class ScheduleUnavailability extends Model
         return $this->belongsTo(Schedule::class);
     }
 
-    public function employee(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(Employee::class);
+        return $this->belongsTo(User::class);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use Carbon\Carbon;
+use App\Models\User;
 use Livewire\Component;
 use App\Models\Service;
 use App\Models\Employee;
@@ -16,11 +17,11 @@ use Spatie\GoogleCalendar\Event;
  */
 class CreateBooking extends Component
 {
-    public $employees;
+    public $users;
 
     public $state = [
         'service' => '',
-        'employee' => '',
+        'user' => '',
         'time' => '',
         'email' => '',
         'name' => ''
@@ -28,7 +29,7 @@ class CreateBooking extends Component
 
     public function mount()
     {
-        $this->employees = collect();
+        $this->users = collect();
     }
 
     protected $listeners = [
@@ -39,7 +40,7 @@ class CreateBooking extends Component
     {
         return [
             'state.service' => 'required|exists:services,id',
-            'state.employee' => 'required|exists:employees,id',
+            'state.user' => 'required|exists:users,id',
             'state.time' => 'required|numeric',
             'state.name' => 'required|string',
             'state.email' => 'required|email',
@@ -58,30 +59,26 @@ class CreateBooking extends Component
         $this->state['time'] = '';
     }
 
-    public function updatedStateEmployee()
+    public function updatedStateUser()
     {
         $this->clearTime();
     }
 
     public function updatedStateService($serviceId)
     {
-        $this->state['employee'] = '';
+        $this->state['user'] = '';
         if (!$serviceId) {
-            $this->employees = collect();
+            $this->users = collect();
             return null;
         }
 
         $this->clearTime();
 
-        $this->employees = $this->selectedService->employees;
+        $this->users = $this->selectedService->users;
     }
 
     public function createBooking()
     {
-        if (str_starts_with($this->state['client_telephone'], '+')) {
-            session()->flash('message', 'Client telephone should start with country code format eg, +256');
-        }
-        session()->flash('message', 'correct phone number');
         $this->validate();
 
         $appointment = Appointment::make([
@@ -96,7 +93,7 @@ class CreateBooking extends Component
         ]);
 
         $appointment->service()->associate($this->selectedService);
-        $appointment->employee()->associate($this->selectedEmployee);
+        $appointment->user()->associate($this->selectedUser);
 
         $appointment->save();
 
@@ -138,16 +135,16 @@ class CreateBooking extends Component
 
     public function getHasDetailsToBookProperty()
     {
-        return $this->state['service'] && $this->state['employee'] && $this->state['time'];
+        return $this->state['service'] && $this->state['user'] && $this->state['time'];
     }
 
-    public function getSelectedEmployeeProperty()
+    public function getSelectedUserProperty()
     {
-        if (!$this->state['employee']) {
+        if (!$this->state['user']) {
             return null;
         }
 
-        return Employee::findOrFail($this->state['employee']);
+        return User::findOrFail($this->state['user']);
     }
 
     public function getTimeObjectProperty()

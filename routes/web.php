@@ -41,20 +41,26 @@ Route::get('/dashboard', function () {
 
 Route::get('/bookings/create', CreateBooking::class);
 Route::get('/bookings/{appointment:uuid}', ShowBooking::class)->name('bookings.show');
-Route::resource('services', ServiceController::class);
-Route::resource('employees', EmployeeController::class);
-Route::resource('users', UserController::class);
-Route::resource('appointments', AppointmentController::class);
-Route::resource('unavailabilities', UnavailabilityController::class);
-Route::resource('schedules', ScheduleController::class);
-Route::get('employees/schedules/create', CreateSchedule::class)->name('employees.schedules.create');
-Route::get('employees/unavailabilities/create', CreateScheduleUnavailability::class)->name('employees.unavailabilities.create');
-Route::get('manage/users/create', CreateUser::class)->name('manage.users.create');
-Route::get('manage/roles', [SystemRoleController::class, 'index'])->name('manage.roles.index');
-Route::get('manage/roles/create', CreateRole::class)->name('manage.roles.create');
-Route::get('manage/permissions', [SystemPermissionController::class, 'index'])->name('manage.permissions.index');
-Route::get('manage/permissions/create', CreatePermission::class)->name('manage.permissions.create');
-Route::get('manage/role-permissions', RolePermissions::class)->name('manage.rolesPermissions');
-Route::get('manage/role-permissions/create', CreateRolePermission::class)->name('manage.rolesPermissions.create');
+Route::group(
+    ['middleware' => 'auth'],
+    function () {
+        Route::resource('services', ServiceController::class);
+        Route::resource('employees', EmployeeController::class);
+        Route::resource('users', UserController::class);
+        Route::resource('appointments', AppointmentController::class);
+        Route::resource('unavailabilities', UnavailabilityController::class);
+        Route::resource('schedules', ScheduleController::class);
+        Route::get('employees/schedules/create', CreateSchedule::class)->name('employees.schedules.create');
+        Route::get('employees/unavailabilities/create', CreateScheduleUnavailability::class)->name('employees.unavailabilities.create');
+        Route::get('manage/users/create', CreateUser::class)->name('manage.users.create');
+        Route::get('manage/roles', [SystemRoleController::class, 'index'])->name('manage.roles.index');
+        Route::get('manage/roles/create', CreateRole::class)->name('manage.roles.create');
+        Route::get('manage/permissions', [SystemPermissionController::class, 'index'])->name('manage.permissions.index');
+        Route::get('manage/permissions/create', CreatePermission::class)->name('manage.permissions.create');
+        Route::get('manage/role-permissions', RolePermissions::class)->name('manage.rolesPermissions');
+        Route::get('manage/role-permissions/create', CreateRolePermission::class)->name('manage.rolesPermissions.create');
+
+    });
+
 
 require __DIR__ . '/auth.php';

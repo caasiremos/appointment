@@ -51,7 +51,7 @@
                                             @foreach($schedules as $schedule)
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                     <a href="#"
-                                                       class="text-indigo-600 hover:text-indigo-900">{{$schedule->employee->name}}</a>
+                                                       class="text-indigo-600 hover:text-indigo-900">{{$schedule->user->name}}</a>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                     {{$schedule->date->format('D jS M Y')}}

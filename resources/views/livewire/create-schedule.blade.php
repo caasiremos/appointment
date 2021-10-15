@@ -14,15 +14,15 @@
                 <!-- employee -->
                     <div class="mt-4">
                         <x-label for="employee" :value="__('Select an employee')"></x-label>
-                        <select name="employee" id="position" class="block mt-1 w-full border-none rounded-lg
+                        <select name="user" id="position" class="block mt-1 w-full border-none rounded-lg
                             rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                            wire:model="state.employee" {{ !$employees->count() ? 'disabled="disabled"' : '' }}>
+                            wire:model="state.user" {{ !$users->count() ? 'disabled="disabled"' : '' }}>
                             <option value="" disabled>Select employee</option>
-                            @foreach($employees as $employee)
-                                <option value="{{$employee->id }}">{{$employee->name }}</option>
+                            @foreach($users as $user)
+                                <option value="{{$user->id }}">{{$user->name }}</option>
                             @endforeach
                         </select>
-                        @error('state.employee') <span class="error">{{ $message }}</span> @enderror
+                        @error('state.user') <span class="error">{{ $message }}</span> @enderror
                     </div>
                 <!-- Schedule Date -->
                     <div>

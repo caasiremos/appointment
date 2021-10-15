@@ -14,7 +14,7 @@ class Schedule extends Model
     protected $fillable = [
         'date',
         'start_time',
-        'end_time'
+        'end_time',
     ];
 
     protected $casts = [
@@ -28,8 +28,8 @@ class Schedule extends Model
         return $this->hasMany(ScheduleUnavailability::class);
     }
 
-    public function employee(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(Employee::class);
+        return $this->belongsTo(User::class);
     }
 }

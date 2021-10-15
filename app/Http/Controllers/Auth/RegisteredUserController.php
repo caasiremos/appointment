@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\Role;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -20,13 +21,15 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('auth.register');
+        $roles = Role::get();
+
+        return view('auth.register', compact('roles'));
     }
 
     /**
      * Handle an incoming registration request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      *
      * @throws \Illuminate\Validation\ValidationException
@@ -35,17 +38,25 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'telephone' => ['required', 'max:10'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'position' => ['required'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'telephone' => $request->telephone,
+            'position' => $request->position,
             'password' => Hash::make($request->password),
         ]);
 
+        $selectedRole = Role::findOrFail($request->role);
+
         event(new Registered($user));
+
+        $user->attachRole($selectedRole);
 
         Auth::login($user);
 

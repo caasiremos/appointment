@@ -40,12 +40,8 @@
                         </x-slot>
 
                         <x-slot name="content">
-                            <x-dropdown-link :href="route('employees.index')">
+                            <x-dropdown-link :href="route('users.index')">
                                 {{ __('Employees') }}
-                            </x-dropdown-link>
-
-                            <x-dropdown-link :href="route('manage.rolesPermissions')">
-                                {{ __('Employee Services') }}
                             </x-dropdown-link>
 
                             <x-dropdown-link :href="route('schedules.index')">
@@ -85,10 +81,6 @@
                         </x-slot>
 
                         <x-slot name="content">
-                            <x-dropdown-link :href="route('users.index')">
-                                {{ __('Users') }}
-                            </x-dropdown-link>
-
                             <x-dropdown-link :href="route('manage.roles.index')">
                                 {{ __('Roles') }}
                             </x-dropdown-link>

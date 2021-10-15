@@ -8,6 +8,7 @@ use App\Models\Permission;
 
 class RolePermissions extends Component
 {
+
     public $roles;
 
     public function mount()

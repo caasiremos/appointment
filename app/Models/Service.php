@@ -16,8 +16,8 @@ class Service extends Model
         'duration'
     ];
 
-    public function employees(): BelongsToMany
+    public function users(): BelongsToMany
     {
-        return $this->belongsToMany(Employee::class);
+        return $this->belongsToMany(User::class);
     }
 }

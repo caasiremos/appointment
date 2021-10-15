@@ -18,7 +18,7 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        $schedules = Schedule::with('employee', 'unavailabilities')
+        $schedules = Schedule::with('user', 'unavailabilities')
             ->paginate(10);
         return view('schedules.index', compact('schedules'));
     }

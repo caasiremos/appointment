@@ -1,11 +1,11 @@
 <x-slot name="header">
     <div class="flex justify-between">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Create System Users') }}
+            {{ __('Create Employee') }}
         </h2>
         <a type="button" href="{{route('users.index')}}"
            class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-            All Users
+            All Employees
         </a>
     </div>
 </x-slot>
@@ -21,7 +21,8 @@
                         <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')"
                                  required autofocus
                                  wire:model="name"></x-input>
-                        @error('name') <span class="error">{{ $message }}</span> @enderror
+                        @error('name') <span
+                            class="ml-2 mt-5 text-sm font-medium font-semibold leading-5 text-red-600">{{ $message }}</span> @enderror
                     </div>
 
                     <!-- Email -->
@@ -30,7 +31,8 @@
                         <x-input id="email" class="block mt-1 w-full" type="email" name="email"
                                  :value="old('email')" required
                                  wire:model="email"></x-input>
-                        @error('email') <span class="error">{{ $message }}</span> @enderror
+                        @error('email') <span
+                            class="ml-2 mt-5 text-sm font-medium font-semibold leading-5 text-red-600">{{ $message }}</span> @enderror
                     </div>
 
                     <!-- Telephone -->
@@ -39,7 +41,8 @@
                         <x-input maxlength="10" id="telephone" class="block mt-1 w-full" type="number" name="telephone"
                                  :value="old('telephone')" required
                                  wire:model="telephone"></x-input>
-                        @error('email') <span class="error">{{ $message }}</span> @enderror
+                        @error('telephone') <span
+                            class="ml-2 mt-5 text-sm font-medium font-semibold leading-5 text-red-600">{{ $message }}</span> @enderror
 
                     </div>
 
@@ -58,12 +61,25 @@
                     </div>
 
                     <div class="mt-4">
+                        <x-label for="service" :value="__('Service')"></x-label>
+                        <select name="service" id="service" class="block mt-1 w-full border-none rounded-lg
+                            rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                wire:model="service">
+                            <option value="">Select Service</option>
+                            @foreach($this->services as $service)
+                                <option value="{{$service->id}}">{{ucwords($service->name) }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="mt-4">
                         <x-label for="role" :value="__('Role')"></x-label>
                         <select name="role" id="role" class="block mt-1 w-full border-none rounded-lg
                             rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                 wire:model="role">
+                            <option value="">Select Role</option>
                             @foreach($this->roles as $role)
-                                <option>{{ucwords($role->display_name) }}</option>
+                                <option value="{{$role->id}}">{{ucwords($role->display_name) }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -74,22 +90,14 @@
                         <x-input maxlength="10" id="password" class="block mt-1 w-full" type="text" name="password"
                                  :value="old('password')" required
                                  wire:model="password"></x-input>
-                        @error('password') <span class="error">{{ $message }}</span> @enderror
-                    </div>
-
-                    <!-- Telephone -->
-                    <div class="mt-4">
-                        <x-label for="confirm_password" :value="__('Confirm Password')"></x-label>
-                        <x-input id="confirm_password" class="block mt-1 w-full" type="text" name="confirm_password"
-                                 :value="old('confirm_password')" required
-                                 wire:model="confirm_password"></x-input>
-                        @error('confirm_password') <span class="error">{{ $message }}</span> @enderror
+                        @error('password') <span
+                            class="ml-2 mt-5 text-sm font-medium font-semibold leading-5 text-red-600">{{ $message }}</span> @enderror
                     </div>
 
                     <div class="flex items-center justify-start mt-4">
 
                         <x-button class="ml-4 bg-indigo-600 hover:bg-indigo-700">
-                            {{ __('Create User') }}
+                            {{ __('Create Employee') }}
                         </x-button>
                     </div>
                 </form>

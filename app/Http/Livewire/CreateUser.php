@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\User;
 use App\Models\Role;
 use Livewire\Component;
+use App\Models\Service;
 use App\Models\Employee;
 
 class CreateUser extends Component
@@ -17,30 +18,37 @@ class CreateUser extends Component
 
     public $role;
 
+    public $service;
+
     public $telephone;
 
     public $position;
+
+    public $services;
 
     public $roles;
 
     protected $rules = [
         'name' => 'required|string|max:255',
         'email' => 'required|string|email|max:255|unique:users',
-        'password' => 'required|confirmed',
+        'password' => 'required',
         'telephone' => 'required|max:10',
-        'position' => 'required'
+        'position' => 'required',
+        'role' => 'required',
+        'service' => 'required',
     ];
 
     public function mount()
     {
         $this->roles = Role::get();
+        $this->services = Service::get();
     }
 
     public function createUser()
     {
         $this->validate();
 
-        $user = User::make([
+        $user = User::create([
             'name' => $this->name,
             'email' => $this->email,
             'password' => $this->password,
@@ -48,11 +56,13 @@ class CreateUser extends Component
             'position' => $this->position,
         ]);
 
-        $user->role()->associate($this->selectedRole);
-
-        if (!$user->save()) {
+        if (!$user) {
             return back()->withInput();
         }
+
+        $user->attachRole($this->selectedRole);
+
+        $user->services()->attach($this->selectedService);
 
         return redirect()->route('users.index');
     }
@@ -64,6 +74,15 @@ class CreateUser extends Component
         }
 
         return Role::findOrFail($this->role);
+    }
+
+    public function getSelectedServiceProperty()
+    {
+        if (!$this->role) {
+            return null;
+        }
+
+        return Service::findOrFail($this->service);
     }
 
     public function render()

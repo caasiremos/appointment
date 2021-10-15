@@ -2,16 +2,17 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\User;
 use Livewire\Component;
 use App\Models\Employee;
 use App\Models\Schedule;
 
 class CreateSchedule extends Component
 {
-    public $employees;
+    public $users;
 
     public $state = [
-        'employee' => '',
+        'user' => '',
         'date' => '',
         'start_time' => '',
         'end_time' => ''
@@ -21,28 +22,28 @@ class CreateSchedule extends Component
         'state.date' => 'required',
         'state.start_time' => 'required',
         'state.end_time' => 'required',
-        'state.employee' => 'required'
+        'state.user' => 'required'
     ];
 
 
     protected $messages = [
-        'state.employee.required' => 'Employee was not selected'
+        'state.user.required' => 'Employee was not selected'
     ];
 
-    public function mount(Employee $employee)
+    public function mount(User $user)
     {
-        $this->employees = $employee->get();
+        $this->users = $user->get();
     }
 
-    public function getSelectedEmployeeProperty()
+    public function getSelectedUserProperty()
     {
         $this->validate();
 
-        if (!$this->state['employee']) {
+        if (!$this->state['user']) {
             return null;
         }
 
-        return Employee::findOrFail($this->state['employee']);
+        return User::findOrFail($this->state['user']);
     }
 
     public function createSchedule()
@@ -53,11 +54,13 @@ class CreateSchedule extends Component
             'date' => $this->state['date'],
             'start_time' => $this->state['start_time'],
             'end_time' => $this->state['end_time'],
+            'user_id' => $this->selectedUser->id
         ]);
 
-        $schedule->employee()->associate($this->selectedEmployee);
+        $schedule->user()->associate($this->selectedUser);
 
         $schedule->save();
+
 
         return redirect()->to(route('schedules.index'));
     }
