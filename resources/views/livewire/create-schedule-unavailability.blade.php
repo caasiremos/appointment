@@ -13,13 +13,13 @@
                 @csrf
                 <!-- employee -->
                     <div class="mt-4">
-                        <x-label for="employee" :value="__('Select an employee')"></x-label>
-                        <select name="employee" id="position" class="block mt-1 w-full border-none rounded-lg
+                        <x-label for="user" :value="__('Select an employee')"></x-label>
+                        <select name="user" id="position" class="block mt-1 w-full border-none rounded-lg
                             rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                wire:model="state.employee" {{ !$employees->count() ? 'disabled="disabled"' : '' }} required>
+                                wire:model="state.user" {{ !$users->count() ? 'disabled="disabled"' : '' }} required>
                             <option value="" disabled>Select employee</option>
-                            @foreach($employees as $employee)
-                                <option value="{{$employee->id }}">{{$employee->name }}</option>
+                            @foreach($users as $user)
+                                <option value="{{$user->id }}">{{$user->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -29,9 +29,9 @@
                         <x-label for="date" :value="__('Schedule Date')" class="mt-3"></x-label>
                         <select name="schedule" id="position" class="block mt-1 w-full border-none rounded-lg
                             rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                wire:model="state.schedule" {{ !$this->employeeSchedules->count() ? 'disabled="disabled"' : '' }} required>
+                                wire:model="state.schedule" {{ !$this->userSchedules->count() ? 'disabled="disabled"' : '' }} required>
                             <option value="" disabled>Select Schedule</option>
-                            @foreach($this->employeeSchedules as $schedule)
+                            @foreach($this->userSchedules as $schedule)
                                 @if(!\Carbon\Carbon::now()->subDay()->gt($schedule->date))
                                     <option
                                         value="{{$schedule->id }}">{{$schedule->date->format('D  jS M Y') }}</option>
@@ -41,7 +41,7 @@
                     </div>
 
                     <!-- Start Time -->
-                    <div class="mt-4" {{ !$employees->count() ? 'opacity-50' : '' }}>
+                    <div class="mt-4" {{ !$users->count() ? 'opacity-50' : '' }}>
                         <x-label for="start_time" :value="__('Start Time')"></x-label>
                         <x-input id="start_time" class="block mt-1 w-full" type="time" name="start_time"
                                  :value="old('start_time')" required
@@ -49,7 +49,7 @@
                     </div>
 
                     <!-- End Time -->
-                    <div class="mt-4" {{ !$employees->count() ? 'opacity-50' : '' }}>
+                    <div class="mt-4" {{ !$users->count() ? 'opacity-50' : '' }}>
                         <x-label for="start_time" :value="__('Start Time')"></x-label>
                         <x-input id="start_time" class="block mt-1 w-full" type="time" name="start_time"
                                  :value="old('state.start_time')" required

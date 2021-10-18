@@ -14,6 +14,7 @@ use App\Http\Livewire\RolePermissions;
 use App\Http\Livewire\CreateRolePermission;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SystemRoleController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\UnavailabilityController;
@@ -35,10 +36,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
+Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 Route::get('/bookings/create', CreateBooking::class);
 Route::get('/bookings/{appointment:uuid}', ShowBooking::class)->name('bookings.show');
 Route::group(
@@ -59,8 +57,6 @@ Route::group(
         Route::get('manage/permissions/create', CreatePermission::class)->name('manage.permissions.create');
         Route::get('manage/role-permissions', RolePermissions::class)->name('manage.rolesPermissions');
         Route::get('manage/role-permissions/create', CreateRolePermission::class)->name('manage.rolesPermissions.create');
-
     });
-
 
 require __DIR__ . '/auth.php';

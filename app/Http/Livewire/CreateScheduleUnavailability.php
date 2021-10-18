@@ -3,40 +3,40 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\Employee;
+use App\Models\user;
 use App\Models\Schedule;
 use App\Models\ScheduleUnavailability;
 
 class CreateScheduleUnavailability extends Component
 {
-    public $employees;
+    public $users;
 
     public $state = [
-        'employee' => '',
+        'user' => '',
         'schedule' => '',
         'start_time' => '',
         'end_time' => ''
     ];
 
-    public function mount(Employee $employee)
+    public function mount(User $user)
     {
-        $this->employees = $employee->get();
+        $this->users = $user->get();
 
-        $this->employeeSchedules = collect();
+        $this->userSchedules = collect();
     }
 
-    public function getEmployeeSchedulesProperty()
+    public function getuserSchedulesProperty()
     {
-        if (!$this->state['employee']) {
+        if (!$this->state['user']) {
             return null;
         }
 
-        return Employee::findOrFail($this->state['employee'])->schedules;
+        return User::findOrFail($this->state['user'])->schedules;
     }
 
-    public function getSelectedEmployeeProperty()
+    public function getSelecteduserProperty()
     {
-        return Employee::findOrFail($this->state['employee']);
+        return User::findOrFail($this->state['user']);
     }
 
     public function getSelectedScheduleProperty()
@@ -56,7 +56,7 @@ class CreateScheduleUnavailability extends Component
         ]);
 
         $scheduleUnavailability->schedule()->associate($this->selectedSchedule);
-        $scheduleUnavailability->employee()->associate($this->selectedEmployee);
+        $scheduleUnavailability->user()->associate($this->selecteduser);
         $scheduleUnavailability->save();
         return redirect()->route('unavailabilities.index');
     }

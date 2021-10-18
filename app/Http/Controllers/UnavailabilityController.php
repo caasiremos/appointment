@@ -18,9 +18,16 @@ class UnavailabilityController extends Controller
      */
     public function index()
     {
-        $schedule_unvailabilities = ScheduleUnavailability::with('schedule', 'employee')
-            ->orderBy('created_at', 'desc')
-            ->get();
+        if (auth()->user()->roles->first()->name === 'admin') {
+            $schedule_unvailabilities = ScheduleUnavailability::with('schedule', 'user')
+                ->orderBy('created_at', 'desc')
+                ->get();
+        }else{
+            $schedule_unvailabilities = ScheduleUnavailability::with('schedule', 'user')
+                ->where('user_id', auth()->user()->id)
+                ->orderBy('created_at', 'desc')
+                ->get();
+        }
         return view('schedule-unavailabilities.index', compact('schedule_unvailabilities'));
     }
 

@@ -59,7 +59,7 @@
                                             @foreach($schedule_unvailabilities as $schedule_unvailability)
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                     <a href="#" class="text-indigo-600 hover:text-indigo-900">
-                                                        {{$schedule_unvailability->employee->name }}
+                                                        {{$schedule_unvailability->user->name }}
                                                     </a>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">

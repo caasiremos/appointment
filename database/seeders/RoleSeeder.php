@@ -15,7 +15,7 @@ class RoleSeeder extends Seeder
     public function run()
     {
         Role::create([
-            'name' => "Admin",
+            'name' => "admin",
             'display_name' => "Admin",
             'description' => "Allow User to control the system ACL",
         ]);

@@ -9,10 +9,9 @@ use App\Models\Schedule;
 
 class CreateSchedule extends Component
 {
-    public $users;
+//    public $users;
 
     public $state = [
-        'user' => '',
         'date' => '',
         'start_time' => '',
         'end_time' => ''
@@ -22,29 +21,28 @@ class CreateSchedule extends Component
         'state.date' => 'required',
         'state.start_time' => 'required',
         'state.end_time' => 'required',
-        'state.user' => 'required'
     ];
 
 
-    protected $messages = [
-        'state.user.required' => 'Employee was not selected'
-    ];
+//    protected $messages = [
+//        'state.user.required' => 'Employee was not selected'
+//    ];
 
-    public function mount(User $user)
-    {
-        $this->users = $user->get();
-    }
+//    public function mount(User $user)
+//    {
+//        $this->users = $user->get();
+//    }
 
-    public function getSelectedUserProperty()
-    {
-        $this->validate();
-
-        if (!$this->state['user']) {
-            return null;
-        }
-
-        return User::findOrFail($this->state['user']);
-    }
+//    public function getSelectedUserProperty()
+//    {
+//        $this->validate();
+//
+//        if (!$this->state['user']) {
+//            return null;
+//        }
+//
+//        return User::findOrFail($this->state['user']);
+//    }
 
     public function createSchedule()
     {
@@ -54,10 +52,9 @@ class CreateSchedule extends Component
             'date' => $this->state['date'],
             'start_time' => $this->state['start_time'],
             'end_time' => $this->state['end_time'],
-            'user_id' => $this->selectedUser->id
         ]);
 
-        $schedule->user()->associate($this->selectedUser);
+        $schedule->user()->associate(auth()->user()->id);
 
         $schedule->save();
 

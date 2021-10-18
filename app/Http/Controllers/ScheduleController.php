@@ -18,8 +18,14 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        $schedules = Schedule::with('user', 'unavailabilities')
-            ->paginate(10);
+        if (auth()->user()->roles->first()->name === 'admin') {
+            $schedules = Schedule::with('user', 'unavailabilities')
+                ->paginate(10);
+        }else{
+            $schedules = Schedule::with('user', 'unavailabilities')
+                ->where('user_id', auth()->user()->id)
+                ->paginate(10);
+        }
         return view('schedules.index', compact('schedules'));
     }
 

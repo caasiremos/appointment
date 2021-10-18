@@ -30,7 +30,7 @@ class NotificationHelper
         // Use the client to do fun stuff like send text messages!
         $client->messages->create(
         // the number you'd like to send the message to
-            '+256755372923',
+            '+256786966244',
             [
                 // A Twilio phone number you purchased at twilio.com/console
                 'from' => '+18065459384',

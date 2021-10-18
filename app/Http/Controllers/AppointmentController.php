@@ -11,16 +11,26 @@ class AppointmentController extends Controller
     {
         $this->middleware(['auth']);
     }
+
     /**
      * Display a listing of the resource.
      *
      */
     public function index()
     {
-        $appointments = Appointment::with('employee', 'service')
-            ->orderBy('created_at', 'desc')
-            ->paginate(7);
-        return view('appointments.index', compact('appointments'));
+        if (auth()->user()->roles->first()->name === 'admin') {
+            $appointments = Appointment::with('user', 'service')
+                ->orderBy('created_at', 'desc')
+                ->paginate(7);
+            return view('appointments.index', compact('appointments'));
+
+        } else {
+            $appointments = Appointment::with('user', 'service')
+                ->orderBy('created_at', 'desc')
+                ->where('user_id', auth()->user()->id)
+                ->paginate(7);
+            return view('appointments.index', compact('appointments'));
+        }
     }
 
     /**
