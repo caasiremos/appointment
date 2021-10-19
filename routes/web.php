@@ -33,7 +33,7 @@ use App\Http\Controllers\SystemPermissionController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
 });
 
 Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
