@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Africa/Kampala',
 
     /*
     |--------------------------------------------------------------------------
@@ -230,5 +230,4 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
-
 ];

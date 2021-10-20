@@ -1,8 +1,11 @@
-<div class="bg-gray-200 max-w-sm mx-auto m-6 p-5 rounded-lg">
-    <h1 class="text-lg font-extrabold mx-auto p-4 caret-indigo-700">BOOK AN APPOINTMENT</h1>
+
+<div class="bg-green-100 w-full min-h-screen relative pt-10 bg-cover" style="background-image: url('https://www.balonadvocates.com/sites/default/files/sliders/balon-advocates-practice-areas.jpg')">
+    <div class="absolute bg-black opacity-50 top-0 w-full h-screen"></div>
+    <div class="bg-[#141b43] max-w-sm mx-auto pt-4 p-5 rounded-lg relative">
+    <h1 class="text-lg font-extrabold mx-auto p-4 caret-white text-white">BOOK AN APPOINTMENT</h1>
     <form wire:submit.prevent="createBooking">
         <div class="mb-6">
-            <label class="inline-block text-gray-700 font-bold mb-2">Please select a service</label>
+            <label class="inline-block text-white font-bold mb-2">Please select a service</label>
             <select name="service" id="service" class="bg-white h-10 w-full border-none rounded-lg"
                     wire:model="state.service">
                 <option value="">Select service</option>
@@ -13,7 +16,7 @@
         </div>
 
         <div class="mb-6 {{ !$users->count() ? 'opacity-25' : '' }}">
-            <label class="inline-block text-gray-700 font-bold mb-2">Please select an Employee</label>
+            <label class="inline-block text-white font-bold mb-2">Please select an Employee</label>
             <select name="user" id="user" class="bg-white h-10 w-full border-none rounded-lg"
                     wire:model="state.user" {{ !$users->count() ? 'disabled="disabled"' : '' }}>
                 <option value="">Select Employee</option>
@@ -24,17 +27,17 @@
         </div>
 
         <div class="mb-6 {{ !$this->selectedService || !$this->selectedUser ? 'opacity-25' : '' }}">
-            <label class="inline-block text-gray-700 font-bold mb-2">Select Appointment Time</label>
+            <label class="inline-block text-white font-bold mb-2">Select Appointment Time</label>
             <livewire:booking-calendar :service="$this->selectedService" :employee="$this->selectedUser"
                                        :key="optional($this->selectedUser)->id"/>
         </div>
         @if($this->hasDetailsToBook)
             <div class="mb-6">
-                <div class="text-gray-700 font-bold mb-2">
+                <div class="text-white font-bold mb-2">
                     You're ready to book
                 </div>
 
-                <div class="border-t border-b border-gray-300 py-2">
+                <div class="border-t border-b border-gray-300 text-white py-2">
                     {{ $this->selectedService->name }} ({{ $this->selectedService->duration }} minutes)
                     with {{ $this->selectedUser->name }}
                     on {{ $this->timeObject->format('D jS M Y') }} at {{ $this->timeObject->format('g:i A') }}
@@ -42,7 +45,7 @@
             </div>
             <div class="mb-6">
                 <div class="mb-3">
-                    <label for="name" class="inline-block text-gray-700 font-bold mb-2">Your name</label>
+                    <label for="name" class="inline-block text-white font-bold mb-2">Your name</label>
                     <input type="text" name="name" id="name" class="bg-white h-10 w-full border-none rounded-lg"
                            wire:model.defer="state.name">
 
@@ -54,7 +57,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="email" class="inline-block text-gray-700 font-bold mb-2">Your email</label>
+                    <label for="email" class="inline-block text-white font-bold mb-2">Your email</label>
                     <input type="text" name="email" id="email" class="bg-white h-10 w-full border-none rounded-lg"
                            wire:model.defer="state.email">
 
@@ -66,7 +69,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="client_telephone" class="inline-block text-gray-700 font-bold mb-2">Client Telephone</label>
+                    <label for="client_telephone" class="inline-block text-white font-bold mb-2">Client Telephone</label>
                     <input type="text" name="telephone" id="client_telephone" placeholder="+2567839****" class="bg-white h-10 w-full border-none rounded-lg"
                            wire:model.defer="state.client_telephone">
 
@@ -94,4 +97,5 @@
 {{--            Book now--}}
 {{--        </button>--}}
 {{--    </form>--}}
+</div>
 </div>

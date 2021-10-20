@@ -418,7 +418,7 @@
                 <!-- Validation Errors -->
                 <x-auth-validation-errors class="mb-4" :errors="$errors" />
                 <div>
-                    <form method="POST" action="{{ route('login') }}" autocomplete="off">
+                    <form method="POST" action="{{ route('register') }}" autocomplete="off">
                         @csrf
 
                         <div class="flex justify-between py-2">
@@ -475,17 +475,6 @@
 
                                 <x-input id="password" class="block mt-1 w-full" type="password" name="password"
                                     required autocomplete="new-password" />
-                            </div>
-                        </div>
-                        <div class="flex items-center py-2 justify-start">
-                            <div class="flex-1 mr-2">
-                                <x-label for="password_confirmation" :value="__('Confirm Password')" />
-
-                                <x-input id="password_confirmation" class="block mt-1 w-full" type="password"
-                                    name="password_confirmation" required />
-                            </div>
-                            <div class="flex-1 ml-2">
-                                &nbsp;
                             </div>
                         </div>
                         <div class="flex justify-between py-2">
