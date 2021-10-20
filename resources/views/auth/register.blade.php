@@ -404,14 +404,14 @@
         style="background-image: url('https://www.balonadvocates.com/sites/default/files/sliders/balon-advocates-practice-areas.jpg')">
         <div class="absolute bg-black opacity-50 w-full h-full"></div>
         <div class="flex flex-col items-center justify-center h-screen">
-            <div class="w-1/2 bg-[#141b43] z-50 font-bold rounded-t-lg p-10">
+            <div class="w-full md:w-1/2 bg-[#141b43] z-50 font-bold rounded-t-lg p-10">
                 <div class="flex justify-center items-center">
                     <a href="/">
                         <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
                     </a>
                 </div>
             </div>
-            <div class="w-1/2 z-50 bg-white font-bold rounded-b-lg p-10">
+            <div class="w-full md:w-1/2 z-50 bg-white font-bold rounded-b-lg p-10">
                 <!-- Session Status -->
                 <x-auth-session-status class="mb-4" :status="session('status')" />
 
@@ -421,7 +421,7 @@
                     <form method="POST" action="{{ route('register') }}" autocomplete="off">
                         @csrf
 
-                        <div class="flex justify-between py-2">
+                        <div class="flex flex-col md:flex-row justify-between py-2">
                             <!-- Name -->
                             <div class="flex-1 mr-2">
                                 <x-label for="name" :value="__('Name')" />
@@ -430,20 +430,20 @@
                                     :value="old('name')" required autofocus />
                             </div>
                             <!-- Email Address -->
-                            <div class="flex-1 ml-2">
+                            <div class="flex-1 md:ml-2">
                                 <x-label for="email" :value="__('Email')" />
                                 <x-input id="email" class="block mt-1 w-full" type="email" name="email"
                                     :value="old('email')" required autofocus />
                             </div>
                         </div>
-                        <div class="flex justify-between py-2">
+                        <div class="flex flex-col md:flex-row justify-between py-2">
                             <!-- Telephone -->
                             <div class="flex-1 mr-2">
                                 <x-label for="telephone" :value="__('Telephone')"></x-label>
                                 <x-input maxlength="10" id="telephone" class="block mt-1 w-full" type="number"
                                     name="telephone" :value="old('telephone')" required></x-input>
                             </div>
-                            <div class="flex-1 ml-2">
+                            <div class="flex-1 md:ml-2">
                                 <x-label for="position" :value="__('Position')"></x-label>
                                 <select name="position" id="position"
                                     class="block mt-1 w-full rounded-lg shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
@@ -456,10 +456,10 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="flex justify-between py-2">
+                        <div class="flex flex-col md:flex-row justify-between py-2">
 
                             <!-- Role -->
-                            <div class="flex-1 mr-2">
+                            <div class="flex-1 md:mr-2">
                                 <x-label for="role" :value="__('Role')"></x-label>
                                 <select name="role" id="role"
                                     class="block mt-1 w-full rounded-lg shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
@@ -470,7 +470,7 @@
                                 </select>
                             </div>
                             <!-- Password -->
-                            <div class="flex-1 ml-2">
+                            <div class="flex-1 md:ml-2">
                                 <x-label for="password" :value="__('Password')" />
 
                                 <x-input id="password" class="block mt-1 w-full" type="password" name="password"
