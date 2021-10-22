@@ -127,7 +127,7 @@
 <div class="email-content mt-5">
     <div class="content bg-white">
         <div class="text-left p-4">
-            <p class="font-weight-bold pt-4 pb-2">Hello {{ucwords($appointment->employee->name)}}.</p>
+            <p class="font-weight-bold pt-4 pb-2">Hello {{ucwords($appointment->user->name)}}.</p>
             <p class="font-weight-semibold ">You have an appointment booking with {{$appointment->client_name}} for
                 {{$appointment->service->name }} for {{ $appointment->service->duration }} minutes on {{ $appointment->date->format('D jS M Y') }} at {{$appointment->start_time->format('g:i A')}}</p>
             <p>Best Regards.<br>

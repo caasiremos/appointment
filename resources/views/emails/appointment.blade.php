@@ -129,7 +129,7 @@
         <div class="text-left p-4">
             <p class="font-weight-bold pt-4 pb-2">Hello {{ucwords($appointment->client_name)}}. Thanks for booking</p>
             <p class="font-weight-semibold ">{{$appointment->service->name }} for {{ $appointment->service->duration }} minutes
-                with {{ $appointment->employee->name }}  <br> on {{ $appointment->date->format('D jS M Y') }} at {{$appointment->start_time->format('g:i A')}}</p>
+                with {{ $appointment->user->name }}  <br> on {{ $appointment->date->format('D jS M Y') }} at {{$appointment->start_time->format('g:i A')}}</p>
             <a href="{{ route('bookings.show', $appointment) . '?token=' . $appointment->token }}"
                class="btn btn-confirm btn-block my-4" style="color: white">Cancel Appointment Booking</a>
             <p>If you have any questions, please contact us.</p>

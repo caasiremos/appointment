@@ -13,7 +13,7 @@ class NotificationHelper
     public static function sendEmail(Appointment $appointment)
     {
         Mail::to($appointment->client_email)->send(new AppointmentNotification($appointment));
-        Mail::to($appointment->employee->email)->send(new EmployeeNotification($appointment));
+        Mail::to($appointment->user->email)->send(new EmployeeNotification($appointment));
     }
 
     public static function sendSms(Appointment $appointment)
@@ -36,7 +36,7 @@ class NotificationHelper
                 'from' => '+18065459384',
                 // the body of the text message you'd like to send
                 'body' => 'Hello ' . ucwords($appointment->client_name) . ' Thanks for booking ' . $appointment->service->name . ' for ' .
-                    $appointment->service->duration . ' minutes with ' . $appointment->employee->name . ' on ' .
+                    $appointment->service->duration . ' minutes with ' . $appointment->user->name . ' on ' .
                     $appointment->date->format('D jS M Y') . ' at ' . $appointment->start_time->format('g:i A'),
             ]
         );

@@ -97,31 +97,10 @@ class CreateBooking extends Component
 
         $appointment->save();
 
-        $appointment = Appointment::latest()->first();
         ProcessEmail::dispatch($appointment);
         ProcessSms::dispatch($appointment);
 
         return redirect()->to(route('bookings.show', $appointment) . '?token=' . $appointment->token);
-
-//        $appointment = Appointment::latest()->first();
-//        $event = new Event();
-//        $event->name = 'Balon Advocate Client Appointment';
-//        $event->startDateTime = Carbon::parse($appointment->start_time);
-//        $event->endDateTime = Carbon::parse($appointment->end_time);
-//        $event->decription = ucwords($appointment->client_name) . ' Booking for ' . $appointment->service->name . ' for ' .
-//            $appointment->service->duration . ' minutes with ' . $appointment->employee->name . ' on ' .
-//            $appointment->date->format('D jS M Y') . ' at ' . $appointment->start_time->format('g:i A');
-//        $event->addAttendee([
-//            'email' => $appointment->client_email,
-//            'name' => $appointment->client_name,
-//            'comment' => 'Client',
-//        ]);
-//        $event->addAttendee([
-//            'email' => $appointment->employee->email,
-//            'name' => $appointment->employee->name,
-//            'comment' => 'Client',
-//        ]);
-//        $event->save();
     }
 
     public function getSelectedServiceProperty()
