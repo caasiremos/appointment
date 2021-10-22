@@ -3,6 +3,8 @@
 namespace App\Console\Commands;
 
 use Carbon\Carbon;
+use App\Jobs\ProcessSms;
+use App\Jobs\ProcessEmail;
 use App\Models\Appointment;
 use Illuminate\Console\Command;
 
@@ -41,13 +43,24 @@ class NotificationReminder extends Command
     {
         $date_time = Carbon::now();
 
-        $appointments = Appointment::where('date', $date_time->format('Y-m-d'))
-            ->latest()->first();
-        dd($date_time->addMinute(10)->format('H:i:s'));
+        $appointments = Appointment::where('date', $date_time->format('Y-m-d'))->get();
 
-//        dd($date_time->addMinutes(1)->equalTo($appointments->start_time));
-//        $appointments->each(function($appointment){
-////            if ($appointment->start_time)
-//        });
+        $appointments->each(function ($appointment) {
+            $reminder_time_interval = $appointment->start_time->subMinutes(120);
+            if (!Carbon::now()->lessThanOrEqualTo($appointment->start_time)) {
+                $this->info("Past appointment time");
+                return 0;
+            }
+            if (Carbon::now()->addMinutes(30)->equalTo($reminder_time_interval->addMinutes(30))) {
+                //send notification reminder 60 minutes before appointment start time
+                ProcessEmail::dispatch($appointment);
+                ProcessSms::dispatch($appointment);
+            }
+            if (Carbon::now()->addMinutes(60)->equalTo($reminder_time_interval->addMinutes(60))) {
+                // send notification reminder 30 minutes before appointment start time
+                ProcessEmail::dispatch($appointment);
+                ProcessSms::dispatch($appointment);
+            }
+        });
     }
 }
