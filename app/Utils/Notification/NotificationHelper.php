@@ -25,15 +25,17 @@ class NotificationHelper
         // Your Account SID and Auth Token from twilio.com/console
         $sid = 'AC95e2a81d00bc16fe154a41bbba65e711';
         $token = 'fac584b52b5f32e63fe1c284dad164b1';
+        $messaging_service_ID = 'MG29fede618f8b0ed68df390ea64449e5d';
+
         $client = new Client($sid, $token);
 
         // Use the client to do fun stuff like send text messages!
         $client->messages->create(
         // the number you'd like to send the message to
-            '+256786966244',
+            $appointment->client_telephone,
             [
                 // A Twilio phone number you purchased at twilio.com/console
-                'from' => '+18065459384',
+                'MessagingServiceSid' => $messaging_service_ID,
                 // the body of the text message you'd like to send
                 'body' => 'Hello ' . ucwords($appointment->client_name) . ' Thanks for booking ' . $appointment->service->name . ' for ' .
                     $appointment->service->duration . ' minutes with ' . $appointment->user->name . ' on ' .

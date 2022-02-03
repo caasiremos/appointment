@@ -39,14 +39,14 @@ class NotificationReminder extends Command
      *
      * @return int
      */
-    public function handle()
+    public function handle(): int
     {
         $date_time = Carbon::now();
 
         $appointments = Appointment::where('date', $date_time->format('Y-m-d'))->get();
 
         $appointments->each(function ($appointment) {
-            $reminder_time_interval = $appointment->start_time->subMinutes(120);
+            $reminder_time_interval = $appointment->start_time->subMinutes(90);
             if (!Carbon::now()->lessThanOrEqualTo($appointment->start_time)) {
                 $this->info("Past appointment time");
                 return 0;

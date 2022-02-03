@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Role;
 use Livewire\Component;
 use App\Models\Permission;
+use Illuminate\Http\RedirectResponse;
 
 class CreateRolePermission extends Component
 {
@@ -22,7 +23,7 @@ class CreateRolePermission extends Component
         $this->permissions = Permission::get();
     }
 
-    public function createRolePermission()
+    public function createRolePermission(): RedirectResponse
     {
         if (empty($this->selected_permissions)) {
             session()->flash('message', 'Please select permissions to attach to this role.');
