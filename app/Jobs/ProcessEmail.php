@@ -11,6 +11,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Contracts\Redis\LimiterTimeoutException;
 
 class ProcessEmail implements ShouldQueue
 {
@@ -46,6 +47,7 @@ class ProcessEmail implements ShouldQueue
      * Execute the job.
      *
      * @return void
+     * @throws LimiterTimeoutException
      */
     public function handle()
     {

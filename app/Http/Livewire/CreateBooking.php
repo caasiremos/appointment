@@ -96,7 +96,6 @@ class CreateBooking extends Component
         $appointment->user()->associate($this->selectedUser);
 
         $appointment->save();
-
         ProcessEmail::dispatch($appointment);
         ProcessSms::dispatch($appointment);
 

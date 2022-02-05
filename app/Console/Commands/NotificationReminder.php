@@ -37,29 +37,29 @@ class NotificationReminder extends Command
     /**
      * Execute the console command.
      *
-     * @return int
      */
-    public function handle(): int
+    public function handle()
     {
         $date_time = Carbon::now();
 
         $appointments = Appointment::where('date', $date_time->format('Y-m-d'))->get();
-
         $appointments->each(function ($appointment) {
-            $reminder_time_interval = $appointment->start_time->subMinutes(90);
-            if (!Carbon::now()->lessThanOrEqualTo($appointment->start_time)) {
-                $this->info("Past appointment time");
-                return 0;
-            }
-            if (Carbon::now()->addMinutes(30)->equalTo($reminder_time_interval->addMinutes(30))) {
+            $first_reminder = $appointment->start_time->subMinutes(60);
+            $second_reminder = $appointment->start_time->subMinutes(30);
+            if (Carbon::now()->greaterThanOrEqualTo($first_reminder) && $appointment->notification_count === 0) {
                 //send notification reminder 60 minutes before appointment start time
                 ProcessEmail::dispatch($appointment);
                 ProcessSms::dispatch($appointment);
+                $appointment = Appointment::findOrFail($appointment->id);
+                $appointment->notification_count = 1;
+                $appointment->save();
             }
-            if (Carbon::now()->addMinutes(60)->equalTo($reminder_time_interval->addMinutes(60))) {
-                // send notification reminder 30 minutes before appointment start time
+            if (Carbon::now()->greaterThanOrEqualTo($second_reminder) && $appointment->notification_count == 1) {
                 ProcessEmail::dispatch($appointment);
                 ProcessSms::dispatch($appointment);
+                $appointment = Appointment::findOrFail($appointment->id);
+                $appointment->notification_count = 2;
+                $appointment->save();
             }
         });
     }
