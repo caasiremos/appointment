@@ -43,7 +43,7 @@ Route::group(
     ['middleware' => 'auth'],
     function () {
         Route::resource('services', ServiceController::class);
-        Route::resource('employees', EmployeeController::class);
+//        Route::resource('employees', EmployeeController::class);
         Route::resource('users', UserController::class);
         Route::resource('appointments', AppointmentController::class);
         Route::resource('unavailabilities', UnavailabilityController::class);

@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\Foundation\Application;
 
 class EmployeeController extends Controller
 {
@@ -62,12 +65,13 @@ class EmployeeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return Response
+     * @param Employee $employee
+     * @return Application|Factory|View
      */
-    public function edit($id)
+    public function edit(Employee $employee)
     {
-        //
+        $employee->load('role');
+        return view('employees.edit', compact('employee'));
     }
 
     /**

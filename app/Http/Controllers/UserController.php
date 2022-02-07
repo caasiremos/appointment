@@ -3,8 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\Foundation\Application;
 
 class UserController extends Controller
 {
@@ -56,26 +61,28 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return void
+     * @param User $user
+     * @return Application|Factory|View
      */
-    public function edit(int $id)
+    public function edit(User $user)
     {
-        //
+        $roles = Role::get();
+        return view('users.edit', compact('roles', 'user'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param int $id
-     * @return void
+     * @param User $user
+     * @return RedirectResponse
      */
-    public function update(Request $request, int $id)
+    public function update(Request $request, User $user): RedirectResponse
     {
-        //
+        if (!$user->update($request->all())) {
+            return redirect()->back()->withInput($request->all());
+        }
+        return redirect()->route('users.index');
     }
 
     /**
