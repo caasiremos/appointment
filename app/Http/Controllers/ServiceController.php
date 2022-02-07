@@ -16,6 +16,7 @@ class ServiceController extends Controller
     {
         $this->middleware(['auth']);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -45,17 +46,16 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         $services = Service::create($request->all());
-        if (!$services){
+        if (!$services) {
             return back()->withInput();
         }
         return redirect()->route('services.index');
-
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Response
      */
     public function show($id)
@@ -66,30 +66,33 @@ class ServiceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return Response
+     * @param Service $service
+     * @return Application|Factory|View
      */
-    public function edit($id)
+    public function edit(Service $service)
     {
-        //
+        return view('services.edit', compact('service'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param  int  $id
-     * @return Response
+     * @param Service $service
+     * @return RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Service $service): RedirectResponse
     {
-        //
+        if (!$service->update($request->all())) {
+            return redirect()->back();
+        }
+        return redirect()->route('services.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Response
      */
     public function destroy($id)
