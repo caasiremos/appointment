@@ -16,7 +16,7 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
-                @if(auth()->user()->roles->first()->name === 'admin')
+                @if(auth()->user()->isAbleTo('view-services'))
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-nav-link :href="route('services.index')" :active="request()->routeIs('services.index')">
                             {{ __('Services') }}
@@ -42,31 +42,33 @@
                         </x-slot>
 
                         <x-slot name="content">
-                            @if(auth()->user()->roles->first()->name === 'admin')
+                            @if(auth()->user()->isAbleTo('view-users'))
                                 <x-dropdown-link :href="route('users.index')">
                                     {{ __('Employees') }}
                                 </x-dropdown-link>
                             @endif
-
-                            <x-dropdown-link :href="route('schedules.index')">
-                                {{ __('Schedules') }}
-                            </x-dropdown-link>
-
-                            <x-dropdown-link :href="route('unavailabilities.index')">
-                                {{ __('Schedule Off Hours') }}
-                            </x-dropdown-link>
+                            @if(auth()->user()->isAbleTo('view-schedules'))
+                                <x-dropdown-link :href="route('schedules.index')">
+                                    {{ __('Schedules') }}
+                                </x-dropdown-link>
+                            @endif
+                            @if(auth()->user()->isAbleTo('view-scheduleoffhours'))
+                                <x-dropdown-link :href="route('unavailabilities.index')">
+                                    {{ __('Schedule Off Hours') }}
+                                </x-dropdown-link>
+                            @endif
                         </x-slot>
                     </x-dropdown>
                 </div>
-
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex"
-                     :active="request()->routeIs('appointments.index')">
-                    <x-nav-link :href="route('appointments.index')">
-                        {{ __('Appointments') }}
-                    </x-nav-link>
-                </div>
-
-                @if(auth()->user()->roles->first()->name === 'admin')
+                @if(auth()->user()->isAbleTo('view-appointments'))
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex"
+                         :active="request()->routeIs('appointments.index')">
+                        <x-nav-link :href="route('appointments.index')">
+                            {{ __('Appointments') }}
+                        </x-nav-link>
+                    </div>
+                @endif
+                @if(auth()->user()->isAbleTo('view-roles'))
                     <div class="hidden sm:flex sm:items-center sm:ml-6">
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
@@ -86,17 +88,21 @@
                             </x-slot>
 
                             <x-slot name="content">
-                                <x-dropdown-link :href="route('manage.roles.index')">
-                                    {{ __('Roles') }}
-                                </x-dropdown-link>
-
-                                <x-dropdown-link :href="route('manage.permissions.index')">
-                                    {{ __('Permissions') }}
-                                </x-dropdown-link>
-
-                                <x-dropdown-link :href="route('manage.rolesPermissions')">
-                                    {{ __('Roles Permissions') }}
-                                </x-dropdown-link>
+                                @if(auth()->user()->isAbleTo('view-roles'))
+                                    <x-dropdown-link :href="route('manage.roles.index')">
+                                        {{ __('Roles') }}
+                                    </x-dropdown-link>
+                                @endif
+                                @if(auth()->user()->isAbleTo('view-permissions'))
+                                    <x-dropdown-link :href="route('manage.permissions.index')">
+                                        {{ __('Permissions') }}
+                                    </x-dropdown-link>
+                                @endif
+                                @if(auth()->user()->isAbleTo('view-roles'))
+                                    <x-dropdown-link :href="route('manage.rolesPermissions')">
+                                        {{ __('Roles Permissions') }}
+                                    </x-dropdown-link>
+                                @endif
                             </x-slot>
                         </x-dropdown>
                     </div>
@@ -166,7 +172,7 @@
                     {{ __('Services') }}
                 </x-responsive-nav-link>
             </div>
-        @endif
+    @endif
 
     <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">

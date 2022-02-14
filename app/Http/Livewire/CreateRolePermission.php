@@ -23,7 +23,7 @@ class CreateRolePermission extends Component
         $this->permissions = Permission::get();
     }
 
-    public function createRolePermission(): RedirectResponse
+    public function createRolePermission()
     {
         if (empty($this->selected_permissions)) {
             session()->flash('message', 'Please select permissions to attach to this role.');
