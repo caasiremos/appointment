@@ -9,9 +9,9 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 bg-white border-b border-gray-200">
-                <form wire:submit.prevent="createSchedule" method="POST">
-                @csrf
-                <!-- Schedule Date -->
+                <form wire:submit.prevent="update" method="POST">
+                    @csrf
+                    @method('PUT')
                     <div>
                         <x-label for="date" :value="__('Schedule Date')" class="mt-3"></x-label>
                         <x-input id="date" class="block mt-1 w-full" type="date" name="date" :value="old('date')"
@@ -38,7 +38,7 @@
                     <div class="flex items-center justify-start mt-4">
 
                         <x-button type="submit" class="ml-4 bg-indigo-600 hover:bg-indigo-700">
-                            {{ __('Create Schedule') }}
+                            {{ __('Update Schedule') }}
                         </x-button>
                     </div>
                 </form>

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Contracts\View\View;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\Foundation\Application;
 
 class ScheduleController extends Controller
 {
@@ -12,6 +15,7 @@ class ScheduleController extends Controller
     {
         $this->middleware(['auth']);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +25,7 @@ class ScheduleController extends Controller
         if (auth()->user()->roles->first()->name === 'admin') {
             $schedules = Schedule::with('user', 'unavailabilities')
                 ->paginate(10);
-        }else{
+        } else {
             $schedules = Schedule::with('user', 'unavailabilities')
                 ->where('user_id', auth()->user()->id)
                 ->paginate(10);
@@ -47,7 +51,6 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {
-        dd("here");
     }
 
     /**
@@ -64,12 +67,10 @@ class ScheduleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
-     * @return Response
+     * @return Application|Factory|View
      */
-    public function edit($id)
+    public function edit(Schedule $schedule)
     {
-        //
     }
 
     /**

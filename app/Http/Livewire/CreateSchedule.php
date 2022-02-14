@@ -9,8 +9,6 @@ use App\Models\Schedule;
 
 class CreateSchedule extends Component
 {
-//    public $users;
-
     public $state = [
         'date' => '',
         'start_time' => '',
@@ -22,27 +20,6 @@ class CreateSchedule extends Component
         'state.start_time' => 'required',
         'state.end_time' => 'required',
     ];
-
-
-//    protected $messages = [
-//        'state.user.required' => 'Employee was not selected'
-//    ];
-
-//    public function mount(User $user)
-//    {
-//        $this->users = $user->get();
-//    }
-
-//    public function getSelectedUserProperty()
-//    {
-//        $this->validate();
-//
-//        if (!$this->state['user']) {
-//            return null;
-//        }
-//
-//        return User::findOrFail($this->state['user']);
-//    }
 
     public function createSchedule()
     {
@@ -57,7 +34,6 @@ class CreateSchedule extends Component
         $schedule->user()->associate(auth()->user()->id);
 
         $schedule->save();
-
 
         return redirect()->to(route('schedules.index'));
     }
