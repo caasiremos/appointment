@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -22,5 +23,7 @@ class UserSeeder extends Seeder
             'password' =>  Hash::make('password'),
             'position' => 'Associate'
         ]);
+
+        User::first()->attachRole(Role::first());
     }
 }

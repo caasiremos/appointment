@@ -18,6 +18,7 @@ class DashboardController extends Controller
             ->orderBy('created_at', 'desc')
             ->where('user_id', auth()->user()->id)
             ->paginate(10);
+
         return view('dashboard', compact('appointments'));
     }
 }
