@@ -3,6 +3,7 @@
 use App\Http\Livewire\CreateUser;
 use App\Http\Livewire\CreateRole;
 use App\Http\Livewire\ShowBooking;
+use App\Http\Livewire\EditSchedule;
 use App\Http\Livewire\CreateBooking;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\CreateSchedule;
@@ -43,12 +44,12 @@ Route::group(
     ['middleware' => 'auth'],
     function () {
         Route::resource('services', ServiceController::class);
-//        Route::resource('employees', EmployeeController::class);
         Route::resource('users', UserController::class);
         Route::resource('appointments', AppointmentController::class);
         Route::resource('unavailabilities', UnavailabilityController::class);
         Route::resource('schedules', ScheduleController::class);
         Route::get('employees/schedules/create', CreateSchedule::class)->name('employees.schedules.create');
+        Route::get('employees/schedules/{id}/edit', EditSchedule::class)->name('employees.schedules.edit');
         Route::get('employees/unavailabilities/create', CreateScheduleUnavailability::class)->name('employees.unavailabilities.create');
         Route::get('manage/users/create', CreateUser::class)->name('manage.users.create');
         Route::get('manage/roles', [SystemRoleController::class, 'index'])->name('manage.roles.index');

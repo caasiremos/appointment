@@ -24,10 +24,6 @@
                                     <table class="min-w-full divide-y divide-gray-200">
                                         <thead class="bg-gray-50">
                                         <tr>
-{{--                                            <th scope="col"--}}
-{{--                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">--}}
-{{--                                                Employee--}}
-{{--                                            </th>--}}
                                             <th scope="col"
                                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Date
@@ -40,10 +36,6 @@
                                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 End Time
                                             </th>
-{{--                                            <th scope="col"--}}
-{{--                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">--}}
-{{--                                                Action--}}
-{{--                                            </th>--}}
                                         </tr>
                                         </thead>
                                         <tbody class="bg-white divide-y divide-gray-200">
@@ -63,7 +55,7 @@
                                                     {{$schedule->end_time->format('g:i A')}}
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                                    <a href="{{route('employees.schedules.edit', $schedule->id)}}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                                                 </td>
                                         </tr>
                                         @endforeach

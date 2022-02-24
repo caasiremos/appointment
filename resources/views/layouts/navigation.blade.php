@@ -68,7 +68,7 @@
                         </x-nav-link>
                     </div>
                 @endif
-                @if(auth()->user()->isAbleTo('view-roles'))
+{{--                @if(auth()->user()->isAbleTo('view-roles'))--}}
                     <div class="hidden sm:flex sm:items-center sm:ml-6">
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
@@ -88,25 +88,25 @@
                             </x-slot>
 
                             <x-slot name="content">
-                                @if(auth()->user()->isAbleTo('view-roles'))
+{{--                                @if(auth()->user()->isAbleTo('view-roles'))--}}
                                     <x-dropdown-link :href="route('manage.roles.index')">
                                         {{ __('Roles') }}
                                     </x-dropdown-link>
-                                @endif
-                                @if(auth()->user()->isAbleTo('view-permissions'))
+{{--                                @endif--}}
+{{--                                @if(auth()->user()->isAbleTo('view-permissions'))--}}
                                     <x-dropdown-link :href="route('manage.permissions.index')">
                                         {{ __('Permissions') }}
                                     </x-dropdown-link>
-                                @endif
-                                @if(auth()->user()->isAbleTo('view-roles'))
+{{--                                @endif--}}
+{{--                                @if(auth()->user()->isAbleTo('view-roles'))--}}
                                     <x-dropdown-link :href="route('manage.rolesPermissions')">
                                         {{ __('Roles Permissions') }}
                                     </x-dropdown-link>
-                                @endif
+{{--                                @endif--}}
                             </x-slot>
                         </x-dropdown>
                     </div>
-                @endif
+{{--                @endif--}}
             </div>
 
             <!-- Settings Dropdown -->
