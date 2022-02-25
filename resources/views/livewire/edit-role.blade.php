@@ -1,7 +1,7 @@
 <x-slot name="header">
     <div class="flex justify-between">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Create System Roles') }}
+            {{ __('Edit System Roles') }}
         </h2>
         <a type="button" href="{{route('users.index')}}"
            class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
@@ -13,8 +13,9 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 bg-white border-b border-gray-200">
-                <form wire:submit.prevent="createRole" method="POST">
+                <form wire:submit.prevent="updateRole" method="POST">
                 @csrf
+                    @method('PUT')
                 <!-- Name -->
                     <div>
                         <x-label for="name" :value="__('Name')"></x-label>
@@ -45,7 +46,7 @@
                     <div class="flex items-center justify-start mt-4">
 
                         <x-button class="ml-4 bg-indigo-600 hover:bg-indigo-700">
-                            {{ __('Create Role') }}
+                            {{ __('Update Role') }}
                         </x-button>
                     </div>
                 </form>

@@ -37,7 +37,7 @@ class EditScheduleUnavailability extends Component
     public function updateScheduleUnavailability()
     {
         $unavailability = ScheduleUnavailability::where('id', $this->schedule_id)->first();
-        
+
         $unavailability->update([
             'date' => $this->state['optionSelected'],
             'start_time' => $this->state['start_time'],
