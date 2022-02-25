@@ -44,6 +44,11 @@ class Appointment extends Model
         $builder->whereNull('cancelled_at');
     }
 
+    public function scopeUserAppointment(Builder $builder)
+    {
+        $builder->where('user_id', auth()->user()->id);
+    }
+
     public function isCancelled(): bool
     {
         return !is_null($this->cancelled_at);

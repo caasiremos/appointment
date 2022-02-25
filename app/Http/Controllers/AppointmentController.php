@@ -18,84 +18,10 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        if (auth()->user()->roles->first()->name === 'admin') {
-            $appointments = Appointment::with('user', 'service')
-                ->orderBy('created_at', 'desc')
-                ->paginate(7);
-            return view('appointments.index', compact('appointments'));
-
-        } else {
-            $appointments = Appointment::with('user', 'service')
-                ->orderBy('created_at', 'desc')
-                ->where('user_id', auth()->user()->id)
-                ->paginate(7);
-            return view('appointments.index', compact('appointments'));
-        }
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $appointments = Appointment::userAppointment()
+            ->with('user', 'service')
+            ->orderBy('created_at', 'desc')
+            ->paginate(7);
+        return view('appointments.index', compact('appointments'));
     }
 }
