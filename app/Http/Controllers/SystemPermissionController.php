@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Permission;
+use Illuminate\Http\RedirectResponse;
 
 class SystemPermissionController extends Controller
 {
@@ -15,5 +16,15 @@ class SystemPermissionController extends Controller
     {
         $permissions = Permission::get();
         return view('permissions.index', compact('permissions'));
+    }
+
+    public function destroy($id): RedirectResponse
+    {
+        $permission = Permission::where('id', $id)->first();
+
+        if (!$permission->delete()) {
+            return redirect()->back();
+        }
+        return redirect()->route('manage.permissions.index');
     }
 }

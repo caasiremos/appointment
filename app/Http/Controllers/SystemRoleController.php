@@ -21,7 +21,7 @@ class SystemRoleController extends Controller
     public function destroy($id)
     {
         $role = Role::where('id', $id)->first();
-        
+
         if (!$role->delete()) {
             return redirect()->back();
         }
