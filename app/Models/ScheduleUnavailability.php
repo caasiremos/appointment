@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -19,6 +20,11 @@ class ScheduleUnavailability extends Model
         'start_time' => 'datetime',
         'end_time' => 'datetime',
     ];
+
+    public function scopeUserUnavailability(Builder $builder)
+    {
+        $builder->where('user_id', auth()->user()->id);
+    }
 
     public function schedule(): BelongsTo
     {

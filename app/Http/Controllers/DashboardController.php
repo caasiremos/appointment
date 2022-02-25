@@ -14,9 +14,9 @@ class DashboardController extends Controller
 
     public function dashboard()
     {
-        $appointments = Appointment::with('user', 'service')
+        $appointments = Appointment::userAppointment()
+            ->with('user', 'service')
             ->orderBy('created_at', 'desc')
-            ->where('user_id', auth()->user()->id)
             ->paginate(10);
 
         return view('dashboard', compact('appointments'));
