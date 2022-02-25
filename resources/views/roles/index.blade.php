@@ -52,13 +52,18 @@
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                                     <a href="{{route('manage.roles.edit', $role->id)}}"
-                                                       class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                                                        <form method="POST" action="{{route('manage.roles.destroy', $role->id)}}">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="button text-red-500 hover:text-red-500 ml-2">
-                                                                Delete</button>
-                                                        </form>
+                                                       class="text-indigo-600 hover:text-indigo-900 mr-4">Edit</a>
+                                                    <a href="{{route('manage.roles.show', $role->id)}}"
+                                                       class="text-indigo-600 hover:text-indigo-900 ml-4">Detail</a>
+
+                                                    <form method="POST"
+                                                          action="{{route('manage.roles.destroy', $role->id)}}">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="text-red-500 hover:text-red-500 mt-4">
+                                                            Delete
+                                                        </button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                         @endforeach
