@@ -16,83 +16,11 @@ class ScheduleController extends Controller
         $this->middleware(['auth']);
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     */
     public function index()
     {
-        if (auth()->user()->roles->first()->name === 'admin') {
-            $schedules = Schedule::with('user', 'unavailabilities')
-                ->paginate(10);
-        } else {
-            $schedules = Schedule::with('user', 'unavailabilities')
-                ->where('user_id', auth()->user()->id)
-                ->paginate(10);
-        }
+        $schedules = Schedule::userSchedule()
+            ->with('user', 'unavailabilities')
+            ->paginate(10);
         return view('schedules.index', compact('schedules'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param Request $request
-     * @return void
-     */
-    public function store(Request $request)
-    {
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @return Application|Factory|View
-     */
-    public function edit(Schedule $schedule)
-    {
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param Request $request
-     * @param int $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }
