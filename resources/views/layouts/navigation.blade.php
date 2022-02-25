@@ -115,7 +115,7 @@
                     <x-slot name="trigger">
                         <button
                             class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
-                            <div>{{ Auth::user()->name }}</div>
+                            <div>{{ ucwords(Auth::user()->name) }}</div>
 
                             <div class="ml-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
@@ -128,8 +128,11 @@
                         </button>
                     </x-slot>
 
+
                     <x-slot name="content">
-                        <!-- Authentication -->
+                        <x-dropdown-link :href="route('users.show', Auth::user()->id)">
+                            {{ __('Profile') }}
+                        </x-dropdown-link>                        <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 

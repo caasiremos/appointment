@@ -51,6 +51,7 @@ Route::group(
         Route::resource('appointments', AppointmentController::class);
         Route::resource('unavailabilities', UnavailabilityController::class);
         Route::resource('schedules', ScheduleController::class);
+        Route::post('employee/password/update', [UserController::class, 'updatePassword'])->name('employee.password.update');
         Route::get('employees/schedules/create', CreateSchedule::class)->name('employees.schedules.create');
         Route::get('employees/schedules/{id}/edit', EditSchedule::class)->name('employees.schedules.edit');
         Route::get('employees/unavailabilities/create', CreateScheduleUnavailability::class)->name('employees.unavailabilities.create');

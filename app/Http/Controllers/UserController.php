@@ -7,8 +7,10 @@ use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Contracts\Foundation\Application;
 
 class UserController extends Controller
@@ -50,14 +52,13 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
      * @param int $id
-     * @return void
+     * @return Application|Factory|View
      */
     public function show(int $id)
     {
-        //
+        $user = User::with('roles')->findOrFail($id);
+        return view('users.show', compact('user'));
     }
 
     /**
@@ -83,6 +84,15 @@ class UserController extends Controller
             return redirect()->back()->withInput($request->all());
         }
         return redirect()->route('users.index');
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $user = Auth::user();
+        $user->password = bcrypt($request->password);
+        $user->save();
+        Session::flash('success','Password created successfully');
+        return back();
     }
 
     /**
