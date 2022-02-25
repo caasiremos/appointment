@@ -42,7 +42,7 @@
                         </x-slot>
 
                         <x-slot name="content">
-                            @if(auth()->user()->isAbleTo('view-users'))
+                            @if(auth()->user()->isAbleTo('view-employees'))
                                 <x-dropdown-link :href="route('users.index')">
                                     {{ __('Employees') }}
                                 </x-dropdown-link>
