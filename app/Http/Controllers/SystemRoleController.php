@@ -17,4 +17,14 @@ class SystemRoleController extends Controller
         $roles = Role::withCount('permissions')->get();
         return view('roles.index', compact('roles'));
     }
+
+    public function destroy($id)
+    {
+        $role = Role::where('id', $id)->first();
+        
+        if (!$role->delete()) {
+            return redirect()->back();
+        }
+        return redirect()->route('manage.roles.index');
+    }
 }

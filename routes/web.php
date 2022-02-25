@@ -58,6 +58,7 @@ Route::group(
         Route::get('manage/roles', [SystemRoleController::class, 'index'])->name('manage.roles.index');
         Route::get('manage/roles/create', CreateRole::class)->name('manage.roles.create');
         Route::get('manage/roles/{id}/edit', EditRole::class)->name('manage.roles.edit');
+        Route::delete('manage/roles/{id}/destroy', [SystemRoleController::class,'destroy'])->name('manage.roles.destroy');
         Route::get('manage/permissions', [SystemPermissionController::class, 'index'])->name('manage.permissions.index');
         Route::get('manage/permissions/create', CreatePermission::class)->name('manage.permissions.create');
         Route::get('manage/role-permissions', RolePermissions::class)->name('manage.rolesPermissions');

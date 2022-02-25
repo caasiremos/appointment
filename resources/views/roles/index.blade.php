@@ -53,6 +53,12 @@
                                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                                     <a href="{{route('manage.roles.edit', $role->id)}}"
                                                        class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                                        <form method="POST" action="{{route('manage.roles.destroy', $role->id)}}">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="button text-red-500 hover:text-red-500 ml-2">
+                                                                Delete</button>
+                                                        </form>
                                                 </td>
                                             </tr>
                                         @endforeach
