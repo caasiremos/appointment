@@ -18,6 +18,7 @@ use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SystemRoleController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Livewire\EditScheduleUnavailability;
 use App\Http\Controllers\UnavailabilityController;
 use App\Http\Livewire\CreateScheduleUnavailability;
 use App\Http\Controllers\SystemPermissionController;
@@ -51,6 +52,7 @@ Route::group(
         Route::get('employees/schedules/create', CreateSchedule::class)->name('employees.schedules.create');
         Route::get('employees/schedules/{id}/edit', EditSchedule::class)->name('employees.schedules.edit');
         Route::get('employees/unavailabilities/create', CreateScheduleUnavailability::class)->name('employees.unavailabilities.create');
+        Route::get('employees/unavailabilities/{id}/edit', EditScheduleUnavailability::class)->name('employees.unavailabilities.edit');
         Route::get('manage/users/create', CreateUser::class)->name('manage.users.create');
         Route::get('manage/roles', [SystemRoleController::class, 'index'])->name('manage.roles.index');
         Route::get('manage/roles/create', CreateRole::class)->name('manage.roles.create');

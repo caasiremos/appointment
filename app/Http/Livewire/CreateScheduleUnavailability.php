@@ -9,35 +9,21 @@ use App\Models\ScheduleUnavailability;
 
 class CreateScheduleUnavailability extends Component
 {
-    public $users;
+    public $user;
 
     public $state = [
-        'user' => '',
         'schedule' => '',
         'start_time' => '',
         'end_time' => ''
     ];
 
-    public function mount(User $user)
+    public function mount()
     {
-        $this->users = $user->get();
+        $this->user = auth()->user();
 
-        $this->userSchedules = collect();
+        $this->userSchedules = $this->user->schedules;
     }
 
-    public function getuserSchedulesProperty()
-    {
-        if (!$this->state['user']) {
-            return null;
-        }
-
-        return User::findOrFail($this->state['user'])->schedules;
-    }
-
-    public function getSelecteduserProperty()
-    {
-        return User::findOrFail($this->state['user']);
-    }
 
     public function getSelectedScheduleProperty()
     {
@@ -56,7 +42,7 @@ class CreateScheduleUnavailability extends Component
         ]);
 
         $scheduleUnavailability->schedule()->associate($this->selectedSchedule);
-        $scheduleUnavailability->user()->associate($this->selecteduser);
+        $scheduleUnavailability->user()->associate(auth()->user()->id);
         $scheduleUnavailability->save();
         return redirect()->route('unavailabilities.index');
     }
