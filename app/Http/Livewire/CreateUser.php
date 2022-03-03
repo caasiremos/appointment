@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Utils\Util;
 use App\Models\User;
 use App\Models\Role;
 use Livewire\Component;
@@ -52,7 +53,7 @@ class CreateUser extends Component
             'name' => $this->name,
             'email' => $this->email,
             'password' => bcrypt($this->password),
-            'telephone' => $this->telephone,
+            'telephone' => Util::formatTelephone($this->telephone),
             'position' => $this->position,
         ]);
 
