@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use Carbon\Carbon;
+use App\Utils\Util;
 use App\Models\User;
 use Livewire\Component;
 use App\Models\Service;
@@ -18,6 +19,8 @@ use Spatie\GoogleCalendar\Event;
 class CreateBooking extends Component
 {
     public $users;
+
+    public $loading = false;
 
     public $state = [
         'service' => '',
@@ -79,8 +82,8 @@ class CreateBooking extends Component
 
     public function createBooking()
     {
+        $this->loading = true;
         $this->validate();
-
         $appointment = Appointment::make([
             'date' => $this->timeObject->toDateString(),
             'start_time' => $this->timeObject->toTimeString(),
@@ -89,16 +92,16 @@ class CreateBooking extends Component
             )->toTimeString(),
             'client_name' => $this->state['name'],
             'client_email' => $this->state['email'],
-            'client_telephone' => $this->state['client_telephone'],
+            'client_telephone' => Util::formatTelephone($this->state['client_telephone']),
         ]);
 
         $appointment->service()->associate($this->selectedService);
         $appointment->user()->associate($this->selectedUser);
-
         $appointment->save();
+
         ProcessEmail::dispatch($appointment);
         ProcessSms::dispatch($appointment);
-
+        $this->loading = false;
         return redirect()->to(route('bookings.show', $appointment) . '?token=' . $appointment->token);
     }
 

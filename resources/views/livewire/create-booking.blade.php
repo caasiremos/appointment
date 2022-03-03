@@ -37,7 +37,7 @@
                         You're ready to book
                     </div>
 
-                    <div class="border-t border-b border-gray-300 text-white py-2">
+                    <div class="border-t border-b border-gray-300 text-green-600 py-2">
                         {{ $this->selectedService->name }} ({{ $this->selectedService->duration }} minutes)
                         with {{ $this->selectedUser->name }}
                         on {{ $this->timeObject->format('D jS M Y') }} at {{ $this->timeObject->format('g:i A') }}
@@ -87,17 +87,18 @@
                         @endif
                     </div>
                 </div>
-
-                <button class="bg-indigo-500 text-white h-11 px-4 text-center font-bold rounded-lg w-full">
-                    Book now
-                </button>
+                @if($loading)
+                    <div>
+                        <img src="https://paladins-draft.com/img/circle_loading.gif" width="64" height="64"
+                             class="m-auto mt-1/4">
+                        <p class="inline-block text-green-600 font-bold mb-2">Creating Appointment Booking . . . . .</p>
+                    </div>
+                @else
+                    <button class="bg-indigo-500 text-white h-11 px-4 text-center font-bold rounded-lg w-full">
+                        Book Now
+                    </button>
+                @endif
             @endif
-
         </form>
-        {{--    <form wire:submit.prevent="createBooking">--}}
-        {{--        <button type="submit" class="bg-indigo-500 text-white h-11 px-4 text-center font-bold rounded-lg w-full">--}}
-        {{--            Book now--}}
-        {{--        </button>--}}
-        {{--    </form>--}}
     </div>
 </div>
