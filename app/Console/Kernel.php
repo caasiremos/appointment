@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        (Commands\NotificationReminder::class)
+        (Commands\NotificationReminder::class),
+        (Commands\CreateEmployeeWeeklySchedule::class)
     ];
 
     /**
@@ -25,6 +26,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('appointment:send-reminder')->everyMinute();
+        $schedule->command('employees:create-schedules')->weeklyOn(1, '6:35');
     }
 
     /**

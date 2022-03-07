@@ -48,19 +48,20 @@ class NotificationReminder extends Command
             $second_reminder = $appointment->start_time->subMinutes(30);
             if (Carbon::now()->greaterThanOrEqualTo($first_reminder) && $appointment->notification_count === 0) {
                 //send notification reminder 60 minutes before appointment start time
-                ProcessEmail::dispatch($appointment);
-                ProcessSms::dispatch($appointment);
-                $appointment = Appointment::findOrFail($appointment->id);
-                $appointment->notification_count = 1;
-                $appointment->save();
+                $this->dispatchReminderJobs($appointment, 1);
             }
             if (Carbon::now()->greaterThanOrEqualTo($second_reminder) && $appointment->notification_count == 1) {
-                ProcessEmail::dispatch($appointment);
-                ProcessSms::dispatch($appointment);
-                $appointment = Appointment::findOrFail($appointment->id);
-                $appointment->notification_count = 2;
-                $appointment->save();
+                //send notification reminder 30 minutes before appointment start time
+                $this->dispatchReminderJobs($appointment, 2);
             }
         });
+    }
+
+    private function dispatchReminderJobs($appointment, $notification_count){
+        ProcessEmail::dispatch($appointment);
+        ProcessSms::dispatch($appointment);
+        $appointment = Appointment::findOrFail($appointment->id);
+        $appointment->notification_count = $notification_count;
+        $appointment->save();
     }
 }
