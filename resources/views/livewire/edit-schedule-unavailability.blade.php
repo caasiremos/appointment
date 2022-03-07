@@ -12,21 +12,6 @@
                 <form wire:submit.prevent="updateScheduleUnavailability" method="POST">
                 @csrf
                 @method('PUT')
-                <!-- Schedule Date -->
-                    <div class="mt-6">
-                        <x-label for="date" :value="__('Schedule Date')" class="mt-3"></x-label>
-                        <select name="schedule" id="position" class="block mt-1 w-full border-none rounded-lg
-                            rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                wire:model="state.optionSelected" required>
-                            @foreach($this->userSchedules as $schedule)
-                                @if(!\Carbon\Carbon::now()->subDay()->gt($schedule->date))
-                                    <option value="{{$schedule->id }}"
-                                    >{{$schedule->date->format('D  jS M Y') }}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                    </div>
-
                     <!-- Start Time -->
                     <div class="mt-4">
                         <x-label for="start_time" :value="__('Start Time')"></x-label>
