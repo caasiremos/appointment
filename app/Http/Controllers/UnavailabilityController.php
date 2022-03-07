@@ -21,8 +21,7 @@ class UnavailabilityController extends Controller
         $schedule_unvailabilities = ScheduleUnavailability::userUnavailability()
             ->with('schedule', 'user')
             ->orderBy('created_at', 'desc')
-            ->paginate(10)
-            ->get();
+            ->paginate(10);
 
         return view('schedule-unavailabilities.index', compact('schedule_unvailabilities'));
     }
