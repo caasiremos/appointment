@@ -20,6 +20,7 @@ class ScheduleController extends Controller
     {
         $schedules = Schedule::userSchedule()
             ->with('user', 'unavailabilities')
+            ->orderBy('created_at', 'desc')
             ->paginate(10);
         return view('schedules.index', compact('schedules'));
     }

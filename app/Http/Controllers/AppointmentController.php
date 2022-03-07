@@ -21,7 +21,7 @@ class AppointmentController extends Controller
         $appointments = Appointment::userAppointment()
             ->with('user', 'service')
             ->orderBy('created_at', 'desc')
-            ->paginate(7);
+            ->paginate(10);
         return view('appointments.index', compact('appointments'));
     }
 }
