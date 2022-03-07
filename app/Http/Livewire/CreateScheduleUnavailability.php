@@ -10,7 +10,7 @@ use App\Models\ScheduleUnavailability;
 class CreateScheduleUnavailability extends Component
 {
     public $user;
-
+    public $userSchedules;
     public $state = [
         'schedule' => '',
         'start_time' => '',
