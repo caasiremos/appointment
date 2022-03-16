@@ -25,7 +25,7 @@ class NotificationHelper
         // Your Account SID and Auth Token from twilio.com/console
         $sid = 'AC95e2a81d00bc16fe154a41bbba65e711';
 //        $token = 'fac584b52b5f32e63fe1c284dad164b1';
-        $token = 'ffd24c357e11204eb3243d4337807717';
+        $token = 'bdf5b2eb22f8e0688cbd705604b863fa';
         $messaging_service_ID = 'MG29fede618f8b0ed68df390ea64449e5d';
 
         $client = new Client($sid, $token);
