@@ -23,13 +23,11 @@ class NotificationHelper
 //        $auth_token = env('TWILIO_TOKEN');
 
         // Your Account SID and Auth Token from twilio.com/console
-        $sid = 'AC95e2a81d00bc16fe154a41bbba65e711';
-//        $token = 'fac584b52b5f32e63fe1c284dad164b1';
-        $token = 'bdf5b2eb22f8e0688cbd705604b863fa';
-        $messaging_service_ID = 'MG29fede618f8b0ed68df390ea64449e5d';
+        $sid = env('TWILIO_SSID');
+        $token = env('TWILIO_TOKEN');
+        $messaging_service_ID = env('TWILIO_MESSAGING_SSID');
 
         $client = new Client($sid, $token);
-
         // Use the client to do fun stuff like send text messages!
         $client->messages->create(
         // the number you'd like to send the message to
