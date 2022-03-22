@@ -37,6 +37,14 @@ class User extends Authenticatable
         'telephone',
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+        static::creating(function ($user) {
+            $user->name = ucwords($user->name);
+        });
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
