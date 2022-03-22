@@ -42,7 +42,7 @@
                             <x-label for="position" :value="__('Position')"></x-label>
                             <select name="position" id="position" class="block mt-1 w-full border-none rounded-lg
                             rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                <option>--Select Employee Position</option>
+                                <option>Select Employee Position</option>
                                 <option>Chairman</option>
                                 <option>Managing Partner</option>
                                 <option>Associate</option>
