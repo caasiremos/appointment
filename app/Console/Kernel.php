@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('appointment:send-reminder')->everyMinute();
-        $schedule->command('employees:create-schedules')->weeklyOn(1, '7:00');
+        $schedule->command('employees:create-schedules')->weeklyOn(2, '12:40');
     }
 
     /**
