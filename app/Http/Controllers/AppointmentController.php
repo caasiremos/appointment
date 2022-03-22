@@ -18,10 +18,16 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        $appointments = Appointment::userAppointment()
-            ->with('user', 'service')
-            ->orderBy('created_at', 'desc')
-            ->paginate(10);
+        if (auth()->user()->roles()->first()->name === 'admin') {
+            $appointments = Appointment::with('user', 'service')
+                ->orderBy('created_at', 'desc')
+                ->paginate(50);
+        }else{
+            $appointments = Appointment::userAppointment()
+                ->with('user', 'service')
+                ->orderBy('created_at', 'desc')
+                ->paginate(50);
+        }
         return view('appointments.index', compact('appointments'));
     }
 }

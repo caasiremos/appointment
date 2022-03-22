@@ -14,10 +14,16 @@ class DashboardController extends Controller
 
     public function dashboard()
     {
-        $appointments = Appointment::userAppointment()
-            ->with('user', 'service')
-            ->orderBy('created_at', 'desc')
-            ->paginate(10);
+        if (auth()->user()->roles()->first()->name === 'admin') {
+            $appointments = Appointment::with('user', 'service')
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
+        } else {
+            $appointments = Appointment::userAppointment()
+                ->with('user', 'service')
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
+        }
 
         return view('dashboard', compact('appointments'));
     }
