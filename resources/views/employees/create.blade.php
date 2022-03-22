@@ -43,8 +43,8 @@
                             <select name="position" id="position" class="block mt-1 w-full border-none rounded-lg
                             rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                 <option>--Select Employee Position</option>
-                                <option>Managing Partner</option>
                                 <option>Chairman</option>
+                                <option>Managing Partner</option>
                                 <option>Associate</option>
                                 <option>Legal Assistant</option>
                                 <option>Law clerk</option>
