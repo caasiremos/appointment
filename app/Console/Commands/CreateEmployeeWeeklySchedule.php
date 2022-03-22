@@ -48,7 +48,7 @@ class CreateEmployeeWeeklySchedule extends Command
             foreach (User::all() as $employee) {
                 $employee->schedules()->create([
                     'date' => $day->toDateString(),
-                    'start_time' => '09:00',
+                    'start_time' => '08:00',
                     'end_time' => '17:00',
                     'user_id' => $employee->id
                 ]);
