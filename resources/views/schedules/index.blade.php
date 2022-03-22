@@ -41,10 +41,12 @@
                                         <tbody class="bg-white divide-y divide-gray-200">
                                         <tr>
                                             @foreach($schedules as $schedule)
-{{--                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">--}}
-{{--                                                    <a href="#"--}}
-{{--                                                       class="text-indigo-600 hover:text-indigo-900">{{$schedule->user->name}}</a>--}}
-{{--                                                </td>--}}
+                                                @if (auth()->user()->roles()->first()->name === 'admin')
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                        <a href="#"
+                                                           class="text-indigo-600 hover:text-indigo-900">{{$schedule->user->name}}</a>
+                                                    </td>
+                                                @endif
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                     {{$schedule->date->format('D jS M Y')}}
                                                 </td>
@@ -55,7 +57,8 @@
                                                     {{$schedule->end_time->format('g:i A')}}
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                    <a href="{{route('employees.schedules.edit', $schedule->id)}}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                                    <a href="{{route('employees.schedules.edit', $schedule->id)}}"
+                                                       class="text-indigo-600 hover:text-indigo-900">Edit</a>
                                                 </td>
                                         </tr>
                                         @endforeach

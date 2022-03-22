@@ -21,12 +21,12 @@ class ScheduleController extends Controller
         if (auth()->user()->roles()->first()->name === 'admin') {
             $schedules = Schedule::with('user', 'unavailabilities')
                 ->orderBy('created_at', 'desc')
-                ->paginate(40);
+                ->paginate(100);
         }else{
             $schedules = Schedule::userSchedule()
                 ->with('user', 'unavailabilities')
                 ->orderBy('created_at', 'desc')
-                ->paginate(10);
+                ->paginate(100);
         }
         return view('schedules.index', compact('schedules'));
     }
