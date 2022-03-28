@@ -11,27 +11,28 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use App\Utils\Notification\NotificationHelper;
 use Illuminate\Contracts\Redis\LimiterTimeoutException;
 
 class ProcessEmail implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $appointment;
+    public $appointment;
 
     /**
      * The number of times the job may be attempted.
      *
      * @var int
      */
-    public $tries = 25;
+//    public $tries = 25;
 
     /**
      * The maximum number of unhandled exceptions to allow before failing.
      *
      * @var int
      */
-    public $maxExceptions = 3;
+//    public $maxExceptions = 3;
 
     /**
      * Create a new job instance.
@@ -52,10 +53,11 @@ class ProcessEmail implements ShouldQueue
     public function handle()
     {
         // Allow only 2 emails every 1 second
-        Redis::throttle("email_notification")->allow(2)->every(1)->then(function () {
-            event(new SendEmailEvent($this->appointment));
-        }, function () {
-            $this->release(2);
-        });
+//        Redis::throttle("email_notification")->allow(2)->every(1)->then(function () {
+//            event(new SendEmailEvent($this->appointment));
+            NotificationHelper::sendEmail($this->appointment);
+//        }, function () {
+//            $this->release(2);
+//        });
     }
 }

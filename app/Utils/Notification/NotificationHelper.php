@@ -19,10 +19,6 @@ class NotificationHelper
     public static function sendSms(Appointment $appointment)
     {
         // Your Account SID and Auth Token from twilio.com/console
-//        $account_sid = env('TWILIO_SID');
-//        $auth_token = env('TWILIO_TOKEN');
-
-        // Your Account SID and Auth Token from twilio.com/console
         $sid = env('TWILIO_SSID');
         $token = env('TWILIO_TOKEN');
         $messaging_service_ID = env('TWILIO_MESSAGING_SSID');

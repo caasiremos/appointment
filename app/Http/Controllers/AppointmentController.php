@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Appointment;
 use Illuminate\Http\Request;
+use App\Scopes\OrganizationScope;
 
 class AppointmentController extends Controller
 {
