@@ -20,14 +20,15 @@ class CreateBooking extends Component
 {
     public $users;
 
-    public $loading = false;
+    public $loading = 0;
 
     public $state = [
         'service' => '',
         'user' => '',
         'time' => '',
         'email' => '',
-        'name' => ''
+        'name' => '',
+        'loading' => false,
     ];
 
     public function mount()
@@ -82,7 +83,7 @@ class CreateBooking extends Component
 
     public function createBooking()
     {
-        $this->loading = true;
+        $this->state['loading'] = true;
         $this->validate();
         $appointment = Appointment::make([
             'date' => $this->timeObject->toDateString(),
@@ -98,10 +99,8 @@ class CreateBooking extends Component
         $appointment->service()->associate($this->selectedService);
         $appointment->user()->associate($this->selectedUser);
         $appointment->save();
-
         ProcessEmail::dispatch($appointment);
         ProcessSms::dispatch($appointment);
-        $this->loading = false;
         return redirect()->to(route('bookings.show', $appointment) . '?token=' . $appointment->token);
     }
 

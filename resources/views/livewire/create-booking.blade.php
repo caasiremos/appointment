@@ -3,7 +3,7 @@
     <div class="absolute bg-black opacity-50 top-0 w-full h-screen"></div>
     <div class="bg-[#141b43] max-w-sm mx-auto pt-4 p-5 rounded-lg relative">
         <h1 class="text-lg font-extrabold mx-auto p-4 caret-white text-white">BOOK AN APPOINTMENT</h1>
-        <form wire:submit.prevent="createBooking">
+        <form>
             <div class="mb-6">
                 <label class="inline-block text-white font-bold mb-2">Please select a service</label>
                 <select name="service" id="service" class="bg-white h-10 w-full border-none rounded-lg"
@@ -87,17 +87,15 @@
                         @endif
                     </div>
                 </div>
-                @if($loading)
-                    <div>
-                        <img src="https://paladins-draft.com/img/circle_loading.gif" width="64" height="64"
-                             class="m-auto mt-1/4">
-                        <p class="inline-block text-green-600 font-bold mb-2">Creating Appointment Booking . . . . .</p>
-                    </div>
-                @else
-                    <button class="bg-indigo-500 text-white h-11 px-4 text-center font-bold rounded-lg w-full">
-                        Book Now
-                    </button>
-                @endif
+                <div wire:loading>
+                    <img src="https://paladins-draft.com/img/circle_loading.gif" width="64" height="64"
+                         class="m-auto mt-1/4">
+                    <p class="inline-block text-green-600 font-bold mb-2">Creating Appointment Booking . . . . .</p>
+                </div>
+                <button wire:loading.remove wire:click.prevent="createBooking"
+                        class="bg-indigo-500 text-white h-11 px-4 text-center font-bold rounded-lg w-full">
+                    Book Now
+                </button>
             @endif
         </form>
     </div>
