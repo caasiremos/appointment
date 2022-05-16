@@ -7,6 +7,7 @@ use App\Models\Appointment;
 use App\Mail\EmployeeNotification;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AppointmentNotification;
+use AfricasTalking\SDK\AfricasTalking;
 
 class NotificationHelper
 {
@@ -18,25 +19,15 @@ class NotificationHelper
 
     public static function sendSms(Appointment $appointment)
     {
-        // Your Account SID and Auth Token from twilio.com/console
-        $sid = env('TWILIO_SSID');
-        $token = env('TWILIO_TOKEN');
-        $messaging_service_ID = env('TWILIO_MESSAGING_SSID');
+        $africa_is_talking = new AfricasTalking(config("services.sms.username"), config("services.sms.api_key"));
+        $sms = $africa_is_talking->sms();
+        $response = $sms->send([
+            'to' =>   $appointment->client_telephone,
+            'message' => 'Hello ' . ucwords($appointment->client_name) . ' Thanks for booking ' . $appointment->service->name . ' for ' .
+                $appointment->service->duration . ' minutes with ' . $appointment->user->name . ' on ' .
+                $appointment->date->format('D jS M Y') . ' at ' . $appointment->start_time->format('g:i A'),
+        ]);
 
-        $client = new Client($sid, $token);
-        // Use the client to do fun stuff like send text messages!
-        $client->messages->create(
-        // the number you'd like to send the message to
-            $appointment->client_telephone,
-            [
-                // A Twilio phone number you purchased at twilio.com/console
-                'MessagingServiceSid' => $messaging_service_ID,
-                // the body of the text message you'd like to send
-                'body' => 'Hello ' . ucwords($appointment->client_name) . ' Thanks for booking ' . $appointment->service->name . ' for ' .
-                    $appointment->service->duration . ' minutes with ' . $appointment->user->name . ' on ' .
-                    $appointment->date->format('D jS M Y') . ' at ' . $appointment->start_time->format('g:i A'),
-            ]
-        );
-        return $client;
+        return $response;
     }
 }

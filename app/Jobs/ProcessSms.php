@@ -12,6 +12,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Utils\Notification\NotificationHelper;
+use Illuminate\Contracts\Redis\LimiterTimeoutException;
 
 class ProcessSms implements ShouldQueue
 {
@@ -47,16 +48,14 @@ class ProcessSms implements ShouldQueue
      * Execute the job.
      *
      * @return void
+     * @throws LimiterTimeoutException
      */
     public function handle()
     {
-        // Allow only 2 emails every 1 second
-//        Redis::throttle("sms_notification")->allow(2)->every(1)->then(function () {
-//            event(new SendSmsEvent($this->appointment));
+        Redis::throttle("sms_notification")->allow(2)->every(1)->then(function () {
             NotificationHelper::sendSms($this->appointment);
-
-//        }, function () {
-//            $this->release(2);
-//        });
+        }, function () {
+            $this->release(2);
+        });
     }
 }

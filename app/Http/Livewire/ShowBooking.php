@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use App\Jobs\ProcessSms;
 use App\Models\Appointment;
 use Illuminate\Auth\Access\AuthorizationException;
 
